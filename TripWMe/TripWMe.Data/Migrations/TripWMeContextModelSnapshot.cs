@@ -230,32 +230,7 @@ namespace TripWMe.Data.Migrations
                     b.ToTable("Stop");
                 });
 
-            modelBuilder.Entity("TripWMe.Domain.Trip", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<string>("Name");
-
-                    b.Property<double>("StarRating");
-
-                    b.Property<string>("UserId");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Trip");
-                });
-
-            modelBuilder.Entity("TripWMe.Domain.TripUser", b =>
+            modelBuilder.Entity("TripWMe.Domain.TUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -314,6 +289,46 @@ namespace TripWMe.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TripWMe.Domain.Trip", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<string>("Name");
+
+                    b.Property<double>("StarRating");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Trip");
+                });
+
+            modelBuilder.Entity("TripWMe.Domain.UserTrip", b =>
+                {
+                    b.Property<int>("TripId");
+
+                    b.Property<string>("TUserId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<bool>("IsMain");
+
+                    b.Property<bool>("IsOrganiser");
+
+                    b.Property<DateTime>("LastModified");
+
+                    b.HasKey("TripId", "TUserId");
+
+                    b.HasIndex("TUserId");
+
+                    b.ToTable("UserTrip");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -324,7 +339,7 @@ namespace TripWMe.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("TripWMe.Domain.TripUser")
+                    b.HasOne("TripWMe.Domain.TUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -332,7 +347,7 @@ namespace TripWMe.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("TripWMe.Domain.TripUser")
+                    b.HasOne("TripWMe.Domain.TUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -345,7 +360,7 @@ namespace TripWMe.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TripWMe.Domain.TripUser")
+                    b.HasOne("TripWMe.Domain.TUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -353,7 +368,7 @@ namespace TripWMe.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("TripWMe.Domain.TripUser")
+                    b.HasOne("TripWMe.Domain.TUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -379,11 +394,17 @@ namespace TripWMe.Data.Migrations
                         .HasForeignKey("TripId");
                 });
 
-            modelBuilder.Entity("TripWMe.Domain.Trip", b =>
+            modelBuilder.Entity("TripWMe.Domain.UserTrip", b =>
                 {
-                    b.HasOne("TripWMe.Domain.TripUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("TripWMe.Domain.TUser", "TUser")
+                        .WithMany("UserTrips")
+                        .HasForeignKey("TUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TripWMe.Domain.Trip", "Trip")
+                        .WithMany("UserTrips")
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

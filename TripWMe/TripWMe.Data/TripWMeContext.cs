@@ -11,7 +11,7 @@ using TripWMe.Domain;
 
 namespace TripWMe.Data
 {
-    public class TripWMeContext : IdentityDbContext<TripUser>
+    public class TripWMeContext : IdentityDbContext<TUser>
     {
         public TripWMeContext(DbContextOptions<TripWMeContext> options) : base(options)
         {
@@ -25,6 +25,13 @@ namespace TripWMe.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UserTrip>().HasKey(s => new { s.TripId, s.TUserId});
+            //modelBuilder.Entity<UserTrip>().HasOne(sj => sj.TripUser).WithMany(u => u.UserTrips)
+            //    .HasForeignKey(ujr => ujr.TripUserId).OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<UserTrip>().HasOne(sj => sj.Trip).WithMany(u => u.UserTrips)
+            //    .HasForeignKey(ujr => ujr.TripId).OnDelete(DeleteBehavior.Cascade);
+
+
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
                 modelBuilder.Entity(entityType.Name).Property<DateTime>(ShadowPropertiesHelper.Created);

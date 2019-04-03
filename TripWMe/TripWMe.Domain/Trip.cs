@@ -10,10 +10,9 @@ namespace TripWMe.Domain
         }
         public int Id { get; set; }
         public string Name { get; set; }
-        public string UserName { get; set; }
         public double StarRating { get; set; }
 
         public List<Stop> Stops { get; set; }
-        public TripUser User { get; set; }
+        public List<UserTrip> UserTrips { get; set; }
     }
 }

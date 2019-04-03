@@ -69,6 +69,22 @@ namespace TripWMe.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Trip",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    StarRating = table.Column<double>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trip", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -185,30 +201,6 @@ namespace TripWMe.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Trip",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    UserName = table.Column<string>(nullable: true),
-                    StarRating = table.Column<double>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Trip", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Trip_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Location",
                 columns: table => new
                 {
@@ -229,6 +221,34 @@ namespace TripWMe.Data.Migrations
                         name: "FK_Location_Country_CountryId",
                         column: x => x.CountryId,
                         principalTable: "Country",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserTrip",
+                columns: table => new
+                {
+                    TripId = table.Column<int>(nullable: false),
+                    TUserId = table.Column<string>(nullable: false),
+                    IsOrganiser = table.Column<bool>(nullable: false),
+                    IsMain = table.Column<bool>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTrip", x => new { x.TripId, x.TUserId });
+                    table.ForeignKey(
+                        name: "FK_UserTrip_AspNetUsers_TUserId",
+                        column: x => x.TUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserTrip_Trip_TripId",
+                        column: x => x.TripId,
+                        principalTable: "Trip",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -321,9 +341,9 @@ namespace TripWMe.Data.Migrations
                 column: "TripId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trip_UserId",
-                table: "Trip",
-                column: "UserId");
+                name: "IX_UserTrip_TUserId",
+                table: "UserTrip",
+                column: "TUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -347,19 +367,22 @@ namespace TripWMe.Data.Migrations
                 name: "Stop");
 
             migrationBuilder.DropTable(
+                name: "UserTrip");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Location");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Trip");
 
             migrationBuilder.DropTable(
                 name: "Country");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }
