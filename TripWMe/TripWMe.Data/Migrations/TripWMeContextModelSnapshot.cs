@@ -163,15 +163,15 @@ namespace TripWMe.Data.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<int>("EntityId");
+                    b.Property<string>("EntityId");
 
                     b.Property<string>("EntityName");
 
                     b.Property<DateTime>("LastModified");
 
-                    b.Property<string>("NewValue");
+                    b.Property<string>("NewValues");
 
-                    b.Property<string>("OldValue");
+                    b.Property<string>("OldValues");
 
                     b.HasKey("Id");
 

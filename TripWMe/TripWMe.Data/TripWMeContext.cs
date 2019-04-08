@@ -18,7 +18,7 @@ namespace TripWMe.Data
     {
         public TripWMeContext(DbContextOptions<TripWMeContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<Trip> Trip { get; set; }
@@ -29,7 +29,7 @@ namespace TripWMe.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserTrip>().HasKey(s => new { s.TripId, s.TUserId});
+            modelBuilder.Entity<UserTrip>().HasKey(s => new { s.TripId, s.TUserId });
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
@@ -49,8 +49,9 @@ namespace TripWMe.Data
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            AuditChanges();
             TrackShadowProperties();
+            AuditChanges();
+            
             return (await base.SaveChangesAsync(true, cancellationToken));
         }
 
@@ -60,7 +61,7 @@ namespace TripWMe.Data
             var timestamp = DateTime.Now;
             foreach (var entry in ChangeTracker.Entries().Where(
                 e => e.State == EntityState.Added || e.State == EntityState.Modified
-                && !e.Metadata.IsQueryType ))
+                && !e.Metadata.IsQueryType))
             {
                 entry.Property(ShadowPropertiesHelper.LastModified).CurrentValue = timestamp;
 
@@ -76,21 +77,27 @@ namespace TripWMe.Data
             ChangeTracker.DetectChanges();
             var auditEntriesList = new List<AuditLog>();
             foreach (var entry in ChangeTracker.Entries().Where(
-                e => e.State == EntityState.Modified 
-                && !e.Metadata.IsQueryType 
+                e => e.State == EntityState.Modified
+                && !e.Metadata.IsQueryType
                 && IsAuditable(e)
                 ))
-               
-            {
 
-                var auditEntry = new AuditLog()
+            {
+                foreach (var property in entry.Properties)
                 {
-                    EntityName = entry.Metadata.Relational().TableName,
-                    ColumnName = entry.Properties.FirstOrDefault().Metadata.GetFieldName()
-                    
-                    
-                };
-                auditEntriesList.Add(auditEntry);
+                    if (!property.IsTemporary)
+                    {
+                        var auditEntry = new AuditLog()
+                        {
+                            EntityName = entry.Metadata.Relational().TableName,
+                            ColumnName = property.Metadata.Name,
+                            NewValues = property.CurrentValue.ToString(),
+                            OldValues = property.OriginalValue.ToString()
+                        };
+                        auditEntriesList.Add(auditEntry);
+                    }
+
+                }
             }
             if (auditEntriesList.Count != 0)
             {
@@ -100,18 +107,7 @@ namespace TripWMe.Data
         }
         private bool IsAuditable(EntityEntry e)
         {
-            //if(e.Metadata.FindAnnotation("Auditable") != null)
-            //{
-            //    return true;
-            //}
-
-            //foreach (var item in e.Metadata.GetProperties())
-            //{
-            //    if (item..ToString() == typeof(Auditable).ToString())
-            //    {
-            //        return true;
-            //    }
-            //}
+          
             return true;
         }
     }

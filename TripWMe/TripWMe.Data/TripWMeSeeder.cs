@@ -63,7 +63,11 @@ namespace TripWMe.Data
             await _context.SaveChangesAsync();
 
             var existingTrip = _context.Trip.Where(t => t.Id == 1).FirstOrDefault();
-            if (existingTrip != null) existingTrip.Name = "Changed Name";
+            if (existingTrip != null)
+            {
+                existingTrip.Name = "Changed Name";
+                existingTrip.StarRating = 5.5;
+            }
 
             await _context.SaveChangesAsync();
 

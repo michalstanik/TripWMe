@@ -10,8 +10,8 @@ using TripWMe.Data;
 namespace TripWMe.Data.Migrations
 {
     [DbContext(typeof(TripWMeContext))]
-    [Migration("20190403182208_AddAuditLog")]
-    partial class AddAuditLog
+    [Migration("20190408173234_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -165,15 +165,15 @@ namespace TripWMe.Data.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<int>("EntityId");
+                    b.Property<string>("EntityId");
 
                     b.Property<string>("EntityName");
 
                     b.Property<DateTime>("LastModified");
 
-                    b.Property<string>("NewValue");
+                    b.Property<string>("NewValues");
 
-                    b.Property<string>("OldValue");
+                    b.Property<string>("OldValues");
 
                     b.HasKey("Id");
 
