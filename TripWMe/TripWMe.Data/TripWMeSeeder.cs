@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TripWMe.Domain;
 
@@ -60,6 +61,12 @@ namespace TripWMe.Data
                 }
                 );
             await _context.SaveChangesAsync();
+
+            var existingTrip = _context.Trip.Where(t => t.Id == 1).FirstOrDefault();
+            if (existingTrip != null) existingTrip.Name = "Changed Name";
+
+            await _context.SaveChangesAsync();
+
         }
     }
 }

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWMe.App", "TripWMe.App\TripWMe.App.csproj", "{00B28875-C30B-4B83-9BA3-F44BD8A091F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripWMe.App", "TripWMe.App\TripWMe.App.csproj", "{00B28875-C30B-4B83-9BA3-F44BD8A091F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWMe.Data", "TripWMe.Data\TripWMe.Data.csproj", "{65BD1EA5-7AF4-4457-8E2E-B928EBE69911}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripWMe.Data", "TripWMe.Data\TripWMe.Data.csproj", "{65BD1EA5-7AF4-4457-8E2E-B928EBE69911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWMe.Domain", "TripWMe.Domain\TripWMe.Domain.csproj", "{80E2BFE0-5C27-4226-B4AB-C7516C9C7AE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripWMe.Domain", "TripWMe.Domain\TripWMe.Domain.csproj", "{80E2BFE0-5C27-4226-B4AB-C7516C9C7AE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWMe.CoreHelpers", "TripWMe.CoreHelpers\TripWMe.CoreHelpers.csproj", "{DC50715B-A011-4A03-9236-B1F339EBE40B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{80E2BFE0-5C27-4226-B4AB-C7516C9C7AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80E2BFE0-5C27-4226-B4AB-C7516C9C7AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80E2BFE0-5C27-4226-B4AB-C7516C9C7AE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC50715B-A011-4A03-9236-B1F339EBE40B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC50715B-A011-4A03-9236-B1F339EBE40B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC50715B-A011-4A03-9236-B1F339EBE40B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC50715B-A011-4A03-9236-B1F339EBE40B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
