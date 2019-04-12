@@ -59,9 +59,9 @@ namespace TripWMe.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EntityName = table.Column<string>(nullable: true),
-                    EntityId = table.Column<string>(nullable: true),
-                    ColumnName = table.Column<string>(nullable: true),
+                    TableName = table.Column<string>(nullable: true),
+                    DateTime = table.Column<DateTime>(nullable: false),
+                    KeyValues = table.Column<string>(nullable: true),
                     OldValues = table.Column<string>(nullable: true),
                     NewValues = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),

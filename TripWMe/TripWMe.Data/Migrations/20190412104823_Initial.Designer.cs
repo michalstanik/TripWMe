@@ -10,7 +10,7 @@ using TripWMe.Data;
 namespace TripWMe.Data.Migrations
 {
     [DbContext(typeof(TripWMeContext))]
-    [Migration("20190408173234_Initial")]
+    [Migration("20190412104823_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -161,19 +161,19 @@ namespace TripWMe.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ColumnName");
-
                     b.Property<DateTime>("Created");
 
-                    b.Property<string>("EntityId");
+                    b.Property<DateTime>("DateTime");
 
-                    b.Property<string>("EntityName");
+                    b.Property<string>("KeyValues");
 
                     b.Property<DateTime>("LastModified");
 
                     b.Property<string>("NewValues");
 
                     b.Property<string>("OldValues");
+
+                    b.Property<string>("TableName");
 
                     b.HasKey("Id");
 

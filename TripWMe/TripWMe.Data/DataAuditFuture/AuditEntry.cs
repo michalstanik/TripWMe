@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TripWMe.Domain;
@@ -25,8 +26,9 @@ namespace TripWMe.Data.DataAuditFuture
         public AuditLog ToAudit()
         {
             var audit = new AuditLog();
-            audit.EntityName = TableName;
-            audit.EntityId = JsonConvert.SerializeObject(KeyValues);
+            audit.TableName = TableName;
+            audit.DateTime = DateTime.UtcNow;
+            audit.KeyValues = JsonConvert.SerializeObject(KeyValues);
             audit.OldValues = OldValues.Count == 0 ? null : JsonConvert.SerializeObject(OldValues);
             audit.NewValues = NewValues.Count == 0 ? null : JsonConvert.SerializeObject(NewValues);
             return audit;
