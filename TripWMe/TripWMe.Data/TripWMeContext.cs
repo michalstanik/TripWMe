@@ -25,6 +25,7 @@ namespace TripWMe.Data
         public DbSet<Trip> Trip { get; set; }
         public DbSet<Stop> Stop { get; set; }
         public DbSet<Location> Location { get; set; }
+        public DbSet<LocationType> LocationType { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<AuditLog> AuditLog { get; set; }
 

@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using TripWMe.Data;
+using TripWMe.Data.Repositories;
+using TripWMe.Data.RepositoryInterfaces;
 
 namespace TripWMe.App
 {
@@ -37,6 +39,8 @@ namespace TripWMe.App
                 }
             });
             services.AddTransient<TripWMeSeeder>();
+            services.AddScoped<ITripRepository, TripRepository>();
+            services.AddAutoMapper();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

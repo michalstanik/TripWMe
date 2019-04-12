@@ -24,14 +24,17 @@ namespace TripWMe.Data
             _context.Database.EnsureDeleted();
             _context.Database.Migrate();
 
-            var country1 = new Country() { Name = "Poland" };
-            var country2 = new Country() { Name = "Germany" };
-            var country3 = new Country() { Name = "UK" };
+            var country1 = new Country() { Name = "Poland" , Alpha2Code = "PL"};
+            var country2 = new Country() { Name = "Germany", Alpha2Code = "GE" };
+            var country3 = new Country() { Name = "UK", Alpha2Code = "GB" };
 
-            var location1 = new Location() { LocationName = "Location 1", Latitude = 5435.4554, Longitude = 4535.6542, LocationDescription = "Description 1" , Country = country1 };
-            var location2 = new Location() { LocationName = "Location 2", Latitude = 5435.4554, Longitude = 4535.6542, LocationDescription = "Description 2" , Country = country1 };
-            var location3 = new Location() { LocationName = "Location 3", Latitude = 5435.4554, Longitude = 4535.6542, LocationDescription = "Description 3" , Country = country2 };
-            var location4 = new Location() { LocationName = "Location 4", Latitude = 5435.4554, Longitude = 4535.6542, LocationDescription = "Description 4" , Country = country3 };
+            var locationType1 = new LocationType() { Name = LocationType.LocType.Drink };
+            var locationType2 = new LocationType() { Name = LocationType.LocType.WonderOfWorld };
+
+            var location1 = new Location() { Name = "Location 1", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 1" , Country = country1, LocationType = locationType1 };
+            var location2 = new Location() { Name = "Location 2", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 2" , Country = country1, LocationType = locationType2 };
+            var location3 = new Location() { Name = "Location 3", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 3" , Country = country2, LocationType = locationType1 };
+            var location4 = new Location() { Name = "Location 4", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 4" , Country = country3, LocationType = locationType2 };
 
             _context.Trip.AddRange(
                 new Trip()

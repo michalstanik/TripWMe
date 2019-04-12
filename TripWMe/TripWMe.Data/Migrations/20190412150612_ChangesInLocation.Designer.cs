@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripWMe.Data;
 
 namespace TripWMe.Data.Migrations
 {
     [DbContext(typeof(TripWMeContext))]
-    partial class TripWMeContextModelSnapshot : ModelSnapshot
+    [Migration("20190412150612_ChangesInLocation")]
+    partial class ChangesInLocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,8 +179,6 @@ namespace TripWMe.Data.Migrations
 
                     b.Property<double>("Latitude");
 
-                    b.Property<int>("LocationTypeId");
-
                     b.Property<double>("Longitude");
 
                     b.Property<string>("Name");
@@ -187,22 +187,7 @@ namespace TripWMe.Data.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.HasIndex("LocationTypeId");
-
                     b.ToTable("Location");
-                });
-
-            modelBuilder.Entity("TripWMe.Domain.LocationType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LocationType");
                 });
 
             modelBuilder.Entity("TripWMe.Domain.Stop", b =>
@@ -371,11 +356,6 @@ namespace TripWMe.Data.Migrations
                     b.HasOne("TripWMe.Domain.Country", "Country")
                         .WithMany("Locations")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TripWMe.Domain.LocationType", "LocationType")
-                        .WithMany("Locations")
-                        .HasForeignKey("LocationTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
