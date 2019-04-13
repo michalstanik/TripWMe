@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using TripWMe.App.Models;
 using TripWMe.Domain;
+using TripWMe.Models;
 
 namespace TripWMe.App.Profiles
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TripWMe.App.Models
+namespace TripWMe.Models
 {
     public class StopModel
     {
@@ -17,6 +17,7 @@ namespace TripWMe.App.Models
 
         public string LocationCountryName { get; set; }
         public string LocationCountryAlpha2Code { get; set; }
+
         public string LocationLocationTypeName { get; set; }
     }
 }

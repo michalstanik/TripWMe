@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TripWMe.App.Models;
 using TripWMe.Data.RepositoryInterfaces;
+using TripWMe.Models;
 
 namespace TripWMe.App.Controllers
 {
@@ -31,8 +31,8 @@ namespace TripWMe.App.Controllers
             try
             {
                 var results = await _repository.GetAllTripsAsync(includeStops, includeUsers);
-
-                return _mapper.Map<List<TripModel>>(results);
+                var mapped = _mapper.Map<List<TripModel>>(results);
+                return mapped;
             }
             catch (Exception)
             {

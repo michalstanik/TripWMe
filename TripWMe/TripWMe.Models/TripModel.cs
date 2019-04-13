@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TripWMe.App.Models
+namespace TripWMe.Models
 {
     public class TripModel
     {
@@ -10,5 +10,7 @@ namespace TripWMe.App.Models
         public double StarRating { get; set; }
 
         public List<StopModel> Stops {get;set;}
+
+        public TripStatistics TripStatistics { get; set; }
     }
 }
