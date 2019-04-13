@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +17,11 @@
     <ProjectReference Include="..\TripWMe.Data\TripWMe.Data.csproj" />
     <ProjectReference Include="..\TripWMe.Domain\TripWMe.Domain.csproj" />
     <ProjectReference Include="..\TripWMe.Models\TripWMe.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

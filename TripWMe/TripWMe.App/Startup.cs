@@ -55,7 +55,14 @@ namespace TripWMe.App
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseStaticFiles();
+
+            app.UseMvc(cfg =>
+            {
+                cfg.MapRoute("Default",
+                    "{controller}/{action}/{id?}",
+                    new { controller = "App", Action = "Index" });
+            });
 
             // Seed the database
             using (var scope = app.ApplicationServices.CreateScope())
