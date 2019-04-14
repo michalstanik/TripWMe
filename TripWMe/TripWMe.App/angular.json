@@ -35,7 +35,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "wwwroot/clientapp/dist",
+            "outputPath": "wwwroot/Clientapp/dist",
             "index": "ClientApp/index.html",
             "main": "ClientApp/main.ts",
             "polyfills": "ClientApp/polyfills.ts",
@@ -45,6 +45,7 @@
               "ClientApp/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "ClientApp/styles.css"
             ],
             "scripts": [],
