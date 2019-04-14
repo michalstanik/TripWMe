@@ -59,9 +59,14 @@ namespace TripWMe.App
 
             app.UseMvc(cfg =>
             {
-                cfg.MapRoute("Default",
-                    "{controller}/{action}/{id?}",
-                    new { controller = "App", Action = "Index" });
+                cfg.MapRoute(
+                     "API",
+                     "api/{controller=*}/{action=*}/{id?}");
+
+                cfg.MapRoute(
+                    "Default", // Route name
+                    "{*catchall}", // URL with parameters
+                    new { controller = "App", action = "Index" });
             });
 
             // Seed the database
