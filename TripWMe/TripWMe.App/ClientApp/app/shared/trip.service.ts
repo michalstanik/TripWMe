@@ -7,7 +7,7 @@ export class TripService {
     }
 
     getTrip(id: number) {
-        return TRIPS.find(trip => trip.id === 1)
+        return TRIPS.find(trip => trip.id === id)
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { TripService } from '../../shared/trip.service';
 
@@ -7,13 +8,14 @@ import { TripService } from '../../shared/trip.service';
 })
 
 export class TripDetailsComponent {
-    oneTrip: any
+    trip: any
 
-    constructor(private tripService: TripService) {
+    constructor(private tripService: TripService, private route: ActivatedRoute) {
 
     }
 
     ngOnInit() {
-        this.oneTrip = this.tripService.getTrip(1);
+        this.trip = this.tripService.getTrip(
+            +this.route.snapshot.params['id']);
     }
 }
