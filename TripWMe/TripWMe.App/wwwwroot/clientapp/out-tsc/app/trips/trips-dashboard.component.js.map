@@ -1,1 +1,0 @@
-{"version":3,"file":"trips-dashboard.component.js","sourceRoot":"","sources":["../../../../../ClientApp/app/trips/trips-dashboard.component.ts"],"names":[],"mappings":";AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,eAAe,CAAC;AAM1C;IAAA;IAEA,CAAC;IAFY,sBAAsB;QAJlC,SAAS,CAAC;YACP,QAAQ,EAAE,iBAAiB;YAC3B,WAAW,EAAE,gCAAgC;SAChD,CAAC;OACW,sBAAsB,CAElC;IAAD,6BAAC;CAAA,AAFD,IAEC;SAFY,sBAAsB"}

@@ -1,4 +1,5 @@
 ﻿import { Component, Input } from '@angular/core'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'trip-thumbnail',
@@ -6,5 +7,14 @@
 })
 
 export class TripThumbnailComponent {
-   @Input() trip:any
+    @Input() trip: any
+
+    constructor(private router: Router) {
+
+    }
+
+    navigate() {
+        this.router.navigate(['/trips', this.trip.id])
+    }
+
 }

@@ -1,6 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Params } from '@angular/router';
 import { TripService } from '../../shared/trip.service';
 
 @Component( {
@@ -15,7 +14,9 @@ export class TripDetailsComponent {
     }
 
     ngOnInit() {
-        this.trip = this.tripService.getTrip(
-            +this.route.snapshot.params['id']);
+        this.route.params.forEach((params: Params) => {
+            this.trip = this.tripService.getTrip(+params['id'])
+        })
     }
+
 }
