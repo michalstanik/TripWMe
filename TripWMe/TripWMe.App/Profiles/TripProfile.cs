@@ -9,6 +9,7 @@ namespace TripWMe.App.Profiles
         public TripProfile()
         {
             CreateMap<Trip, TripModel>().ReverseMap();
+            CreateMap<Trip, TripWithStats>();
         }   
     }
 }

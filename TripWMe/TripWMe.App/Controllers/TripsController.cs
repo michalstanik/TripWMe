@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -10,8 +12,9 @@ using TripWMe.Models;
 
 namespace TripWMe.App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TripsController : ControllerBase
     {
         private readonly ITripRepository _repository;
@@ -25,8 +28,23 @@ namespace TripWMe.App.Controllers
             _linkGenerator = linkGenerator;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<TripModel>>> GetAllProjects(bool includeStops = false, bool includeUsers = false)
+        [HttpGet(Name = "GetAllTripsWithStats")]
+        public async Task<ActionResult<List<TripWithStats>>> GetAllTripsWithStats()
+        {
+            try
+            {
+                var results = await _repository.GetAllTripsWithStats();
+                var mapped = _mapper.Map<List<TripWithStats>>(results);
+                return mapped;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet(Name = "GetAllTrips")]
+        public async Task<ActionResult<List<TripModel>>> GetAllTrips(bool includeStops = false, bool includeUsers = false)
         {
             try
             {

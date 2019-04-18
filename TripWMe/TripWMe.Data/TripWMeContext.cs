@@ -28,10 +28,12 @@ namespace TripWMe.Data
         public DbSet<LocationType> LocationType { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<AuditLog> AuditLog { get; set; }
+        public DbSet<TripStats> TripStats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserTrip>().HasKey(s => new { s.TripId, s.TUserId });
+            modelBuilder.Entity<TripStats>().HasKey(s => new { s.TripId });
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {

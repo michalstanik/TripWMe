@@ -3,7 +3,8 @@ import { Router } from '@angular/router'
 
 @Component({
     selector: 'trip-thumbnail',
-    templateUrl: 'trip-thumbnail.component.html' 
+    templateUrl: 'trip-thumbnail.component.html',
+    styleUrls: ["trip-thumbnail.component.css"]
 })
 
 export class TripThumbnailComponent {

@@ -10,7 +10,6 @@ namespace TripWMe.Models
         public double StarRating { get; set; }
 
         public List<StopModel> Stops {get;set;}
-
-        public TripStatistics TripStatistics { get; set; }
+        public List<TUserModel> Users { get; set; }
     }
 }

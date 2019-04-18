@@ -1,13 +1,17 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using System.Text;
 using TripWMe.Data;
 using TripWMe.Data.Repositories;
 using TripWMe.Data.RepositoryInterfaces;
+using TripWMe.Domain;
 
 namespace TripWMe.App
 {
@@ -24,6 +28,25 @@ namespace TripWMe.App
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<TUser, IdentityRole>(cfg =>
+            {
+                cfg.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<TripWMeContext>();
+
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = Configuration["Tokens:Issuer"],
+                        ValidAudience = Configuration["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+                    };
+                }
+                );
+
             services.AddMvc()
                 .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
@@ -55,18 +78,21 @@ namespace TripWMe.App
             }
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+
             app.UseStaticFiles();
 
             app.UseMvc(cfg =>
             {
                 cfg.MapRoute(
-                     "API",
-                     "api/{controller=*}/{action=*}/{id?}");
+                    "API",
+                    "api/{controller=*}/{action=*}/{id?}");
 
-                cfg.MapRoute(
-                    "Default", // Route name
-                    "{*catchall}", // URL with parameters
-                    new { controller = "App", action = "Index" });
+
+                cfg.MapRoute("Default",
+                    "{controller}/{action}/{id?}",
+                    new { controller = "App", Action = "Index" });
             });
 
             // Seed the database
