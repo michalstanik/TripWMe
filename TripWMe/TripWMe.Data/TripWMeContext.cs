@@ -41,7 +41,7 @@ namespace TripWMe.Data
                 //modelBuilder.Entity(entityType.Name).Property<DateTime>(ShadowPropertiesHelper.Created);
                 //modelBuilder.Entity(entityType.Name).Property<DateTime>(ShadowPropertiesHelper.LastModified);
             }
-
+            modelBuilder.Entity<Trip>().Property(p => p.TripCode).HasComputedColumnSql("'TR-' + CONVERT(varchar(10),[Id])");
             base.OnModelCreating(modelBuilder);
         }
 

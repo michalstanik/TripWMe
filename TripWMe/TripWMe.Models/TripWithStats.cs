@@ -11,6 +11,7 @@ namespace TripWMe.Models
     {
         [Required]
         public string Name { get; set; }
+        public string TripCode { get; set; }
 
         public TripStatsModel TripStats { get; set; }
     }

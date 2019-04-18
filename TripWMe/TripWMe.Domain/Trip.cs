@@ -12,6 +12,7 @@ namespace TripWMe.Domain
         }
         public int Id { get; set; }
         public string Name { get; set; }
+        public string TripCode { get; set; }
         public double StarRating { get; set; }
 
         public List<Stop> Stops { get; set; }
