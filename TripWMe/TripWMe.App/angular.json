@@ -35,7 +35,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "wwwroot/Clientapp/dist",
+            "outputPath": "wwwroot/ClientApp/dist",
             "index": "ClientApp/index.html",
             "main": "ClientApp/main.ts",
             "polyfills": "ClientApp/polyfills.ts",

@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { TripService } from '../../shared/trip.service';
+import { TripService } from '../shared/trip.service';
 
 @Component( {
     templateUrl: './trip-details.component.html'

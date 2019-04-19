@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
-import { TripService } from '../shared/trip.service';
+import { TripService } from './shared/trip.service';
 
 @Component({
     selector: 'trips-list',

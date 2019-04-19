@@ -3,7 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./wwwwroot/clientapp/out-tsc",
+    "outDir": "./wwwroot/ClientApp/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "module": "es2015",

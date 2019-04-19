@@ -2,18 +2,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
+import {
+    TripDashboardComponent,
+    TripsListComponent,
+    TripThumbnailComponent,
+    TripDetailsComponent,
+    TripService
+} from './trips/index';
+
+//import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TripDashboardComponent } from './trips/trips-dashboard.component';
-import { TripsListComponent } from './trips/trips-list.component';
-import { TripThumbnailComponent } from './trips/trip-thumbnail.component';
-import { TripDetailsComponent } from './trips/trip-details/trip-details.component'
-
-import { TripService } from './shared/trip.service';
 
 import { appRoutes } from "./routes"
-import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import { RouterModule } from '@angular/router';
         BrowserModule,
         NgbModule,
         FormsModule,
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes),
+        HttpClientModule
   ],
   providers: [TripService],
   bootstrap: [AppComponent]

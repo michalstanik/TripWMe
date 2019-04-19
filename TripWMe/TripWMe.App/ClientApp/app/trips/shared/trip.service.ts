@@ -1,15 +1,33 @@
-﻿import { Injectable } from '@angular/core'
+﻿import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+
+
 
 @Injectable()
 export class TripService {
+
+    constructor(private http: HttpClient) { }
+
+    //public trips: TripWithStats[] = [];
+
     getTrips() {
         return TRIPS
+
     }
+
+    //loadTrips(): Observable<boolean> {
+    //    return this.http.get("/api/trips/GetAllTripsWithStats")
+    //        .map((data: any[]) => {
+    //            this.trips = data;
+    //            return true;
+    //        });
+    //}
 
     getTrip(id: number) {
         return TRIPS.find(trip => trip.id === id)
     }
 }
+
 
     const TRIPS = [
         { id: 1, name: 'Trip 1 NG' },
