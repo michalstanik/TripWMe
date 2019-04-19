@@ -1,5 +1,6 @@
 ﻿import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { ITripWithStats } from './tripWithStats.model';
 
 
 
@@ -23,18 +24,43 @@ export class TripService {
     //        });
     //}
 
-    getTrip(id: number) {
+    getTrip(id: number): ITripWithStats {
         return TRIPS.find(trip => trip.id === id)
     }
 }
 
 
-    const TRIPS = [
-        { id: 1, name: 'Trip 1 NG' },
-        { id: 2, name: 'Trip 2 NG' },
-        { id: 3, name: 'Trip 3 NG' },
-        { id: 4, name: 'Trip 4 NG' },
-        { id: 5, name: 'Trip 5 NG' },
-        { id: 6, name: 'Trip 6 NG' },
-        { id: 7, name: 'Trip 7 NG' },
-    ]
+const TRIPS: ITripWithStats[] = [
+    {
+        id: 1,
+        tripName: "Trip 1",
+        tripCode: "TR-1",
+        tripStats:
+        {
+            locationCount: 1,
+            countryCount: 2,
+            userCount: 3
+        }
+    },
+   {
+       id: 2,
+       tripName: "Trip 2",
+       tripCode: "TR-2",
+       tripStats:
+       {
+            locationCount: 1,
+            countryCount: 2,
+            userCount: 3
+        }
+    },
+    {
+        id: 1, 
+        tripName: "Trip 3",
+        tripCode: "TR-3",
+        tripStats: {
+            locationCount: 1,
+            countryCount: 2,
+            userCount: 3
+        }
+    }
+]

@@ -1,6 +1,6 @@
-﻿export interface TripWithStats {
+﻿export interface ITripWithStats {
     id: number;
-    tripnameName: string;
+    tripName: string;
     tripCode: string;
     tripStats: {
         locationCount: number;
