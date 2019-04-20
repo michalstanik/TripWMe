@@ -1,6 +1,9 @@
 ﻿import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+
 import { ITripWithStats } from './tripWithStats.model';
+import { Subject, Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 
@@ -9,23 +12,21 @@ export class TripService {
 
     constructor(private http: HttpClient) { }
 
-    //public trips: TripWithStats[] = [];
-
-    getTrips() {
-        return TRIPS
+    getTrips(): Observable<ITripWithStats[]> {
+        return this.http.get<ITripWithStats[]>('/api/trips/GetAllTripsWithStats')
+            .pipe(catchError(this.handleError<ITripWithStats[]>('getTrips',[])))
 
     }
 
-    //loadTrips(): Observable<boolean> {
-    //    return this.http.get("/api/trips/GetAllTripsWithStats")
-    //        .map((data: any[]) => {
-    //            this.trips = data;
-    //            return true;
-    //        });
-    //}
-
     getTrip(id: number): ITripWithStats {
         return TRIPS.find(trip => trip.id === id)
+    }
+
+    private handleError<T>(operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+            console.error(error);
+            return of(result as T);
+        }
     }
 }
 
@@ -33,8 +34,8 @@ export class TripService {
 const TRIPS: ITripWithStats[] = [
     {
         id: 1,
-        tripName: "Trip 1",
-        tripCode: "TR-1",
+        name: "Trip 1",
+        tripCode: "TR-11",
         tripStats:
         {
             locationCount: 1,
@@ -44,8 +45,8 @@ const TRIPS: ITripWithStats[] = [
     },
    {
        id: 2,
-       tripName: "Trip 2",
-       tripCode: "TR-2",
+       name: "Trip 2",
+       tripCode: "TR-22",
        tripStats:
        {
             locationCount: 1,
@@ -55,8 +56,8 @@ const TRIPS: ITripWithStats[] = [
     },
     {
         id: 1, 
-        tripName: "Trip 3",
-        tripCode: "TR-3",
+        name: "Trip 3",
+        tripCode: "TR-33",
         tripStats: {
             locationCount: 1,
             countryCount: 2,

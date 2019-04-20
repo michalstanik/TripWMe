@@ -90,6 +90,23 @@ namespace TripWMe.Data.Repositories
             return await query.ToArrayAsync();
         }
 
+        public async Task<Trip> GetTripByCode(string tripCode)
+        {
+            IQueryable<Trip> query = _context.Trip.Where(t => t.TripCode == tripCode);
+
+            query = query
+                .Include(i => i.Stops)
+                    .ThenInclude(l => l.Location)
+                    .ThenInclude(c => c.Country)
+                .Include(c => c.Stops)
+                    .ThenInclude(l => l.Location)
+                    .ThenInclude(lt => lt.LocationType)
+                .Include(c => c.UserTrips)
+                    .ThenInclude(pc => pc.TUser);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             _logger.LogInformation($"Attempitng to save the changes in the context");

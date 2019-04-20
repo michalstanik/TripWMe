@@ -13,6 +13,6 @@ export class TripsListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.trips = this.tripService.getTrips()
+        this.tripService.getTrips().subscribe(trips => {this.trips = trips})
     }
 }

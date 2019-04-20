@@ -14,7 +14,7 @@ namespace TripWMe.App.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TripsController : ControllerBase
     {
         private readonly ITripRepository _repository;
@@ -56,7 +56,22 @@ namespace TripWMe.App.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
 
+        [HttpGet("{tripCode}")]
+        [HttpGet(Name = "GetTripByCode")]
+        public async Task<ActionResult<TripModel>> GetTripByCode(string tripCode)
+        {
+            try
+            {
+                var result = await _repository.GetTripByCode(tripCode);
+                var mapped = _mapper.Map<TripModel>(result);
+                return mapped;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
 

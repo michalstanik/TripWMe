@@ -1,6 +1,8 @@
 ﻿import { Component, Input } from '@angular/core'
 import { Router } from '@angular/router'
 
+import { ITripWithStats } from './shared/tripWithStats.model';
+
 @Component({
     selector: 'trip-thumbnail',
     templateUrl: 'trip-thumbnail.component.html',
@@ -8,7 +10,8 @@ import { Router } from '@angular/router'
 })
 
 export class TripThumbnailComponent {
-    @Input() trip: any
+    @Input() trip: ITripWithStats 
+
 
     constructor(private router: Router) {
 

@@ -83,6 +83,66 @@ namespace TripWMe.Data
                         new UserTrip() { TUser = user2, IsOrganiser = false }
                     }
 
+                },
+                new Trip()
+                {
+                    Name = "Trip 2",
+                    Stops = new List<Stop>()
+                    {
+                        new Stop()
+                        {
+                            Location = location1,
+                            Departure = DateTime.Today.AddDays(10),
+                            Arrival = DateTime.Today.AddDays(5),
+                            Order = 1,
+                            StopDescription = "Stop Description 1",
+                            StopName = "Stop 1"
+                        },
+                        new Stop()
+                        {
+                            Location = location2,
+                            Departure = DateTime.Today.AddDays(10),
+                            Arrival = DateTime.Today.AddDays(5),
+                            Order = 2,
+                            StopDescription = "Stop Description 2",
+                            StopName = "Stop 2"
+                        }
+                    },
+                    UserTrips = new List<UserTrip>()
+                    {
+                        new UserTrip() { TUser = user1, IsOrganiser = true},
+                        new UserTrip() { TUser = user2, IsOrganiser = false }
+                    }
+                },
+                new Trip()
+                {
+                    Name = "Trip 3",
+                    Stops = new List<Stop>()
+                    {
+                        new Stop()
+                        {
+                            Location = location1,
+                            Departure = DateTime.Today.AddDays(10),
+                            Arrival = DateTime.Today.AddDays(5),
+                            Order = 1,
+                            StopDescription = "Stop Description 1",
+                            StopName = "Stop 1"
+                        },
+                        new Stop()
+                        {
+                            Location = location2,
+                            Departure = DateTime.Today.AddDays(10),
+                            Arrival = DateTime.Today.AddDays(5),
+                            Order = 2,
+                            StopDescription = "Stop Description 2",
+                            StopName = "Stop 2"
+                        }
+                    },
+                    UserTrips = new List<UserTrip>()
+                    {
+                        new UserTrip() { TUser = user1, IsOrganiser = true},
+                        new UserTrip() { TUser = user2, IsOrganiser = false }
+                    }
                 }
                 );
             await _context.SaveChangesAsync();
