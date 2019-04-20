@@ -90,9 +90,9 @@ namespace TripWMe.Data.Repositories
             return await query.ToArrayAsync();
         }
 
-        public async Task<Trip> GetTripByCode(string tripCode)
+        public async Task<Trip> GetTripByCode(int tripCode)
         {
-            IQueryable<Trip> query = _context.Trip.Where(t => t.TripCode == tripCode);
+            IQueryable<Trip> query = _context.Trip.Where(t => t.Id == tripCode);
 
             query = query
                 .Include(i => i.Stops)

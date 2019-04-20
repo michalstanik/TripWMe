@@ -60,7 +60,7 @@ namespace TripWMe.App.Controllers
 
         [HttpGet("{tripCode}")]
         [HttpGet(Name = "GetTripByCode")]
-        public async Task<ActionResult<TripModel>> GetTripByCode(string tripCode)
+        public async Task<ActionResult<TripModel>> GetTripByCode(int tripCode)
         {
             try
             {

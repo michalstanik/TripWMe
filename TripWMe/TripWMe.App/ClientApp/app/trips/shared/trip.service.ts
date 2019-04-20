@@ -1,10 +1,11 @@
 ﻿import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
-import { ITripWithStats } from './tripWithStats.model';
 import { Subject, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { ITripWithStats } from './tripWithStats.model';
+import { ITrip } from './trip.model';
 
 
 @Injectable()
@@ -18,8 +19,9 @@ export class TripService {
 
     }
 
-    getTrip(id: number): ITripWithStats {
-        return TRIPS.find(trip => trip.id === id)
+    getTrip(id: number): Observable<ITrip> {
+        return this.http.get<ITrip>('/api/trips/getTripByCode/' + id)
+            .pipe(catchError(this.handleError<ITrip>('getTrips')))
     }
 
     private handleError<T>(operation = 'operation', result?: T) {
