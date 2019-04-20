@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TripWMe.Domain
+namespace TripWMe.Domain.Trips
 {
     public class Location
     {

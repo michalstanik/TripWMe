@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TripWMe.CoreHelpers.Attributes;
+using TripWMe.Domain.User;
 
-namespace TripWMe.Domain
+namespace TripWMe.Domain.Trips
 {
     public class Trip
     {

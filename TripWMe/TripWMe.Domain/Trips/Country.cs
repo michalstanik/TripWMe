@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace TripWMe.Domain
+namespace TripWMe.Domain.Trips
 {
 
     public class Country

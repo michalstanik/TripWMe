@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TripWMe.CoreHelpers.Attributes;
 using TripWMe.Data.DataAuditFuture;
-using TripWMe.Domain;
+using TripWMe.Domain.Admin;
+using TripWMe.Domain.Trips;
+using TripWMe.Domain.User;
 
 namespace TripWMe.Data
 {

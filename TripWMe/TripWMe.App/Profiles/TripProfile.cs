@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TripWMe.Domain;
+using TripWMe.Domain.Trips;
 using TripWMe.Models;
 
 namespace TripWMe.App.Profiles

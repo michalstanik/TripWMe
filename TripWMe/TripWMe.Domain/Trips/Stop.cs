@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TripWMe.Domain
+namespace TripWMe.Domain.Trips
 {
     public class Stop
     {

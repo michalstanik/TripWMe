@@ -1,7 +1,7 @@
 ﻿using System;
 using TripWMe.CoreHelpers.Attributes;
 
-namespace TripWMe.Domain
+namespace TripWMe.Domain.Admin
 {
     [Auditable("NON")]
     public class AuditLog

@@ -1,4 +1,6 @@
-﻿namespace TripWMe.Domain
+﻿using TripWMe.Domain.Trips;
+
+namespace TripWMe.Domain.User
 {
     public class UserTrip
     {

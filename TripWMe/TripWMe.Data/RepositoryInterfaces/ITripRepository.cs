@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TripWMe.Domain;
+using TripWMe.Domain.Trips;
 
 namespace TripWMe.Data.RepositoryInterfaces
 {

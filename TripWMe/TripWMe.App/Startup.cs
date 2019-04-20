@@ -12,6 +12,7 @@ using TripWMe.Data;
 using TripWMe.Data.Repositories;
 using TripWMe.Data.RepositoryInterfaces;
 using TripWMe.Domain;
+using TripWMe.Domain.User;
 
 namespace TripWMe.App
 {

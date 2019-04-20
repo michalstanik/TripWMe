@@ -1,4 +1,4 @@
-﻿namespace TripWMe.Domain
+﻿namespace TripWMe.Domain.Trips
 {
     public class TripStats
     {

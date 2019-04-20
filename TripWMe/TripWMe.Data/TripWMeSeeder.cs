@@ -4,7 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TripWMe.Domain;
+using TripWMe.Domain.Trips;
+using TripWMe.Domain.User;
 
 namespace TripWMe.Data
 {

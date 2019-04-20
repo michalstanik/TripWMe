@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TripWMe.Data.RepositoryInterfaces;
 using TripWMe.Domain;
+using TripWMe.Domain.Trips;
 
 namespace TripWMe.Data.Repositories
 {

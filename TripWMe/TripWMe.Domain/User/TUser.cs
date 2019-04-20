@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace TripWMe.Domain
+namespace TripWMe.Domain.User
 {
     public class TUser : IdentityUser
     {
