@@ -31,7 +31,9 @@ import { appRoutes } from "./routes"
         BrowserModule,
         NgbModule,
         FormsModule,
-        RouterModule.forRoot(appRoutes),
+        RouterModule.forRoot(appRoutes, {
+            useHash:true
+        }),
         HttpClientModule
   ],
   providers: [TripService],
