@@ -6,19 +6,22 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { DxVectorMapModule } from 'devextreme-angular';
 
 import {
     TripDashboardComponent,
     TripsListComponent,
     TripThumbnailComponent,
-    TripDetailsComponent
+    TripDetailsComponent,
+    TripService,
+    MapService
 } from './trips/index';
 
-//import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { appRoutes } from "./routes"
-import { TripService } from './trips/shared/trip.service';
+import { appRoutes } from "./routes";
+
+
 
 
 
@@ -39,9 +42,10 @@ import { TripService } from './trips/shared/trip.service';
         }),
         HttpClientModule,
         BrowserAnimationsModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        DxVectorMapModule
   ],
-  providers: [TripService],
+    providers: [TripService, MapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

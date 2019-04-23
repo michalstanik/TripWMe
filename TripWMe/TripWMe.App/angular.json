@@ -46,13 +46,18 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
+              //"ClientApp/assets/jquery-jvectormap-2.0.3.css",
               "ClientApp/styles.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.slim.min.js",
+              //"node_modules/jquery/dist/jquery.js",
               //"node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/devextreme/dist/js/vectormap-data/world.js"
+              //"ClientApp/assets/jquery-jvectormap-2.0.3.min.js",
+              //"ClientApp/assets/jquery-jvectormap-world-mill.js"
+
             ],
             "es5BrowserSupport": true
           },
