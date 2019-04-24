@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TripWMe.Domain.Trips;
 using TripWMe.Domain.User;
+using static TripWMe.Data.SampleData.CountriesModel;
 
 namespace TripWMe.Data
 {
@@ -27,6 +30,8 @@ namespace TripWMe.Data
             }
             _context.Database.EnsureDeleted();
             _context.Database.Migrate();
+
+            SeedCountries();
 
             var user1 = new TUser() { FirstName = "John", LastName = "Smith", Email = "john.smith@gmail.com", UserName = "john.smith@gmail.com" };
             var user1result = await _userManager.CreateAsync(user1, "P@ssw0rd!");
@@ -156,6 +161,67 @@ namespace TripWMe.Data
             }
 
             await _context.SaveChangesAsync();
+
+        }
+
+        private void SeedCountries()
+        {
+            using (StreamReader r = new StreamReader("C:/Users/micha/source/Repository/TripWMe/TripWMe/TripWMe.Data/SampleData/countries.json"))
+            {
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                };
+
+                string json = r.ReadToEnd();
+                List<CountriesDataModel> items = JsonConvert.DeserializeObject<List<CountriesDataModel>>(json, settings);
+                foreach (var item in items)
+                {
+                    var continent = new Continent();
+                    
+                    var existingContinent = _context.Continent.Where(c => c.Name == item.region).FirstOrDefault();
+
+                    if (existingContinent == null)
+                    {
+                        continent = new Continent() { Name = item.region };
+                        _context.Add(continent);
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        continent = existingContinent;
+                    }
+
+                    var region = new Region();
+                    var existingRegion = _context.Region.Where(rg => rg.name == item.subregion).FirstOrDefault();
+
+                    if(existingRegion == null)
+                    {
+                        region = new Region() { name = item.subregion, Continent = continent };
+                        _context.Add(region);
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        region = existingRegion;
+                    }
+
+                    var newCountry = new Country()
+                    {
+                        Name = item.name.common,
+                        OfficialName = item.name.official,
+                        Alpha2Code = item.cca2,
+                        Alpha3Code = item.cca3,
+                        Area = item.area,
+                        Region = region
+                    };
+                    _context.Add(newCountry);
+                    _context.SaveChanges();
+
+
+                }
+            }
 
         }
     }

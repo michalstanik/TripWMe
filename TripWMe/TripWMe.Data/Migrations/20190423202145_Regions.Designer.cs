@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripWMe.Data;
 
 namespace TripWMe.Data.Migrations
 {
     [DbContext(typeof(TripWMeContext))]
-    partial class TripWMeContextModelSnapshot : ModelSnapshot
+    [Migration("20190423202145_Regions")]
+    partial class Regions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,13 +173,7 @@ namespace TripWMe.Data.Migrations
 
                     b.Property<string>("Alpha2Code");
 
-                    b.Property<string>("Alpha3Code");
-
-                    b.Property<long>("Area");
-
                     b.Property<string>("Name");
-
-                    b.Property<string>("OfficialName");
 
                     b.Property<int?>("RegionId");
 

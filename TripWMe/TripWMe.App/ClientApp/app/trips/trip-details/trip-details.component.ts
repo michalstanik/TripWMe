@@ -3,9 +3,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { TripService } from '../shared/trip.service';
 import { Trip } from '../shared/trip.model';
 
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { DxVectorMapModule } from 'devextreme-angular';
-
 import * as mapsData from 'devextreme/dist/js/vectormap-data/world.js';
 import { Countries, MapService } from '../shared/map.service';
 

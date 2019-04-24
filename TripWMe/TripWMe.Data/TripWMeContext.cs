@@ -26,6 +26,8 @@ namespace TripWMe.Data
         public DbSet<Location> Location { get; set; }
         public DbSet<LocationType> LocationType { get; set; }
         public DbSet<Country> Country { get; set; }
+        public DbSet<Region> Region { get; set; }
+        public DbSet<Continent> Continent { get; set; }
         public DbSet<AuditLog> AuditLog { get; set; }
         public DbSet<TripStats> TripStats { get; set; }
 

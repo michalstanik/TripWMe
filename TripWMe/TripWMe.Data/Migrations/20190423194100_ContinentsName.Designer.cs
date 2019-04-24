@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripWMe.Data;
 
 namespace TripWMe.Data.Migrations
 {
     [DbContext(typeof(TripWMeContext))]
-    partial class TripWMeContextModelSnapshot : ModelSnapshot
+    [Migration("20190423194100_ContinentsName")]
+    partial class ContinentsName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,19 +173,13 @@ namespace TripWMe.Data.Migrations
 
                     b.Property<string>("Alpha2Code");
 
-                    b.Property<string>("Alpha3Code");
-
-                    b.Property<long>("Area");
+                    b.Property<int?>("ContinentId");
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("OfficialName");
-
-                    b.Property<int?>("RegionId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RegionId");
+                    b.HasIndex("ContinentId");
 
                     b.ToTable("Country");
                 });
@@ -226,23 +222,6 @@ namespace TripWMe.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LocationType");
-                });
-
-            modelBuilder.Entity("TripWMe.Domain.Trips.Region", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ContinentId");
-
-                    b.Property<string>("name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContinentId");
-
-                    b.ToTable("Region");
                 });
 
             modelBuilder.Entity("TripWMe.Domain.Trips.Stop", b =>
@@ -427,9 +406,9 @@ namespace TripWMe.Data.Migrations
 
             modelBuilder.Entity("TripWMe.Domain.Trips.Country", b =>
                 {
-                    b.HasOne("TripWMe.Domain.Trips.Region", "Region")
+                    b.HasOne("TripWMe.Domain.Trips.Continent", "Continent")
                         .WithMany("Countries")
-                        .HasForeignKey("RegionId");
+                        .HasForeignKey("ContinentId");
                 });
 
             modelBuilder.Entity("TripWMe.Domain.Trips.Location", b =>
@@ -443,13 +422,6 @@ namespace TripWMe.Data.Migrations
                         .WithMany("Locations")
                         .HasForeignKey("LocationTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TripWMe.Domain.Trips.Region", b =>
-                {
-                    b.HasOne("TripWMe.Domain.Trips.Continent", "Continent")
-                        .WithMany("Regions")
-                        .HasForeignKey("ContinentId");
                 });
 
             modelBuilder.Entity("TripWMe.Domain.Trips.Stop", b =>
