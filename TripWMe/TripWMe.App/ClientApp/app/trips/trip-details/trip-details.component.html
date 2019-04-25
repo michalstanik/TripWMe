@@ -1,11 +1,15 @@
-﻿
+﻿<script>
+    var gemoji = require('gemoji')
+    console.log(gemoji.name.cat)
+</script>
+
+
 <div>
     <h3>Trip Details</h3>
     <h3>{{trip.name}}</h3>
     <h3>{{trip.tripCode}}</h3>
     <h3>Stars: {{trip.starRating}}</h3>
     <h3>StopName: {{trip.stops.stopName}}</h3>
-    <h3><p>\ud83c\uddf2\ud83c\udde8</p></h3>
 </div>
 <div>
     <dx-vector-map id="vector-map"

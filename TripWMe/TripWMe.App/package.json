@@ -25,6 +25,7 @@
     "core-js": "^2.5.4",
     "devextreme": "^18.2.7",
     "devextreme-angular": "^18.2.7",
+    "gemoji": "^4.2.1",
     "jquery": "^3.4.0",
     "ngx-toastr": "^10.0.2",
     "popper": "^1.0.1",
