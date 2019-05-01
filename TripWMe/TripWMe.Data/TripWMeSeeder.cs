@@ -46,9 +46,9 @@ namespace TripWMe.Data
                 throw new InvalidOperationException("Not enable to create user2");
             }
 
-            var country1 = new Country() { Name = "Poland", Alpha2Code = "PL" };
-            var country2 = new Country() { Name = "Germany", Alpha2Code = "GE" };
-            var country3 = new Country() { Name = "UK", Alpha2Code = "GB" };
+            var country1 = _context.Country.Where(c => c.Alpha3Code == "AZE").FirstOrDefault();
+            var country2 = _context.Country.Where(c => c.Alpha3Code == "MEX").FirstOrDefault();
+
 
             var locationType1 = new LocationType() { Name = LocationType.LocType.Drink };
             var locationType2 = new LocationType() { Name = LocationType.LocType.WonderOfWorld };
@@ -56,7 +56,7 @@ namespace TripWMe.Data
             var location1 = new Location() { Name = "Location 1", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 1", Country = country1, LocationType = locationType1 };
             var location2 = new Location() { Name = "Location 2", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 2", Country = country1, LocationType = locationType2 };
             var location3 = new Location() { Name = "Location 3", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 3", Country = country2, LocationType = locationType1 };
-            var location4 = new Location() { Name = "Location 4", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 4", Country = country3, LocationType = locationType2 };
+            var location4 = new Location() { Name = "Location 4", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 4", Country = country2, LocationType = locationType2 };
 
             _context.Trip.AddRange(
                 new Trip()
@@ -194,11 +194,11 @@ namespace TripWMe.Data
                     }
 
                     var region = new Region();
-                    var existingRegion = _context.Region.Where(rg => rg.name == item.subregion).FirstOrDefault();
+                    var existingRegion = _context.Region.Where(rg => rg.Name == item.subregion).FirstOrDefault();
 
                     if(existingRegion == null)
                     {
-                        region = new Region() { name = item.subregion, Continent = continent };
+                        region = new Region() { Name = item.subregion, Continent = continent };
                         _context.Add(region);
                         _context.SaveChanges();
                     }

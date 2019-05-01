@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TripWMe.Data.RepositoryInterfaces;
 using TripWMe.Models;
@@ -74,6 +75,44 @@ namespace TripWMe.App.Controllers
             }
         }
 
+
+        [HttpGet(Name = "GetUserStats")]
+        public async Task<ActionResult<UserStatsModel>> GetUserStats(string userName)
+        {
+            try
+            {
+                var qry = await _repository.GetTripsByUserAsync(userName);
+        
+                var countries = new List<CountryModel>();
+                int countryCount = 0;
+                int tripCount = 0;
+
+                foreach (var item in qry)
+                {
+                    countryCount += item.Stops.Select(s => s.Location.Country).Distinct().Count();
+
+                    var mapped = _mapper.Map<CountryModel>(item.Stops.Select(s => s.Location.Country).Distinct().FirstOrDefault());
+                    countries.Add(mapped);
+
+                    tripCount += item.TripCode.Distinct().Count();
+    
+                }
+
+                var result = new UserStatsModel()
+                {
+                    ContryCount = countryCount,
+
+                    Countries = countries
+                    
+                    
+                };
+                return result;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
 
     }
 }

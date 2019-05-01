@@ -9,6 +9,7 @@ namespace TripWMe.Domain.Trips
         {
             Stops = new List<Stop>();
             TripStats = new TripStats();
+            UserTrips = new List<UserTrip>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,7 +21,7 @@ namespace TripWMe.Domain.Trips
 
         public TripStats TripStats { get; set; }
 
-        public List<TUser> Users()
+        public IEnumerable<TUser> Users()
         {
             var users = new List<TUser>();
             foreach (var join in UserTrips)
@@ -28,6 +29,15 @@ namespace TripWMe.Domain.Trips
                 users.Add(join.TUser);
             }
             return users;
+        }
+
+        public bool UserExist (TUser user)
+        {
+            foreach (var join in UserTrips)
+            {
+                if (join.TUser == user) return true;
+            }
+            return false;
         }
     }
 

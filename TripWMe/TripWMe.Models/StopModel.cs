@@ -17,7 +17,9 @@ namespace TripWMe.Models
 
         public string LocationCountryName { get; set; }
         public string LocationCountryAlpha2Code { get; set; }
-
+        public string LocationCountryAlpha3Code { get; set; }
+        public long LocationCountryArea { get; set; }
+        public string LocationCountryRegionName { get; set; }
         public string LocationLocationTypeName { get; set; }
     }
 }

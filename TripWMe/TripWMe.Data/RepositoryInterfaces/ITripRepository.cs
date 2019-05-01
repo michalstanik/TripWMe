@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TripWMe.Domain.Trips;
 
@@ -11,6 +12,7 @@ namespace TripWMe.Data.RepositoryInterfaces
 
         Task<ICollection<Trip>> GetAllTripsAsync(bool includeStops = false, bool includeUsers = false);
         Task<ICollection<Trip>> GetAllTripsWithStats();
+        Task<ICollection<Trip>> GetTripsByUserAsync(string userName);
         Task<Trip> GetTripByCode(int tripCode);
     }
 }

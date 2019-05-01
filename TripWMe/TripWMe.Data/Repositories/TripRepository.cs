@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using TripWMe.Data.RepositoryInterfaces;
 using TripWMe.Domain;
 using TripWMe.Domain.Trips;
+using TripWMe.Domain.User;
 
 namespace TripWMe.Data.Repositories
 {
@@ -14,11 +16,13 @@ namespace TripWMe.Data.Repositories
     {
         private readonly TripWMeContext _context;
         private readonly ILogger<TripRepository> _logger;
+        private readonly UserManager<TUser> _userManager;
 
-        public TripRepository(TripWMeContext context, ILogger<TripRepository> logger)
+        public TripRepository(TripWMeContext context, ILogger<TripRepository> logger, UserManager<TUser> userManager)
         {
             _context = context;
             _logger = logger;
+            _userManager = userManager;
         }
         public void Add<T>(T entity) where T : class
         {
@@ -38,6 +42,7 @@ namespace TripWMe.Data.Repositories
                     .Include(c => c.Stops)
                         .ThenInclude(l => l.Location)
                         .ThenInclude(c => c.Country)
+                        .ThenInclude(r => r.Region)
                     .Include(c => c.Stops)
                         .ThenInclude(l => l.Location)
                         .ThenInclude(lt => lt.LocationType);
@@ -53,6 +58,7 @@ namespace TripWMe.Data.Repositories
                     .Include(i => i.Stops)
                         .ThenInclude(l => l.Location)
                         .ThenInclude(c => c.Country)
+                        .ThenInclude(r => r.Region)
                     .Include(c => c.Stops)
                         .ThenInclude(l => l.Location)
                         .ThenInclude(lt => lt.LocationType)
@@ -73,12 +79,13 @@ namespace TripWMe.Data.Repositories
                .Include(i => i.Stops)
                 .ThenInclude(l => l.Location)
                 .ThenInclude(c => c.Country)
+                .ThenInclude(r => r.Region)
             .Include(c => c.Stops)
                 .ThenInclude(l => l.Location)
                 .ThenInclude(lt => lt.LocationType)
             .Include(c => c.UserTrips)
-                .ThenInclude(pc => pc.TUser)
-             .Include(s => s.TripStats);
+                .ThenInclude(pc => pc.TUser);
+           //  .Include(s => s.TripStats);
 
 
             foreach (var stat in query)
@@ -91,6 +98,37 @@ namespace TripWMe.Data.Repositories
             return await query.ToArrayAsync();
         }
 
+        public async Task<ICollection<Trip>> GetTripsByUserAsync(string userName)
+        {
+            var user = new TUser();
+            try
+            {
+                user = await _userManager.FindByNameAsync(userName);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("User was not found", ex);
+            }
+
+            IQueryable<Trip> query = _context.Trip;
+
+            query = query
+                .Include(i => i.Stops)
+                    .ThenInclude(l => l.Location)
+                    .ThenInclude(c => c.Country)
+                    .ThenInclude(r => r.Region)
+                .Include(c => c.Stops)
+                    .ThenInclude(l => l.Location)
+                    .ThenInclude(lt => lt.LocationType)
+                .Include(c => c.UserTrips)
+                    .ThenInclude(pc => pc.TUser);
+                    //.Where(u => u.UserExist(user));
+
+
+            return await query.ToArrayAsync();
+        }
+
         public async Task<Trip> GetTripByCode(int tripCode)
         {
             IQueryable<Trip> query = _context.Trip.Where(t => t.Id == tripCode);
@@ -99,6 +137,7 @@ namespace TripWMe.Data.Repositories
                 .Include(i => i.Stops)
                     .ThenInclude(l => l.Location)
                     .ThenInclude(c => c.Country)
+                     .ThenInclude(r => r.Region)
                 .Include(c => c.Stops)
                     .ThenInclude(l => l.Location)
                     .ThenInclude(lt => lt.LocationType)
