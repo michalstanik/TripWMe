@@ -1,4 +1,4 @@
-﻿namespace TripWMe.Models
+﻿namespace TripWMe.Models.Trips
 {
     public class TripStatsModel
     {

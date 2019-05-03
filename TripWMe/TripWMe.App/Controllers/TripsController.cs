@@ -9,11 +9,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TripWMe.Data.RepositoryInterfaces;
+using TripWMe.Domain.Trips;
 using TripWMe.Models;
+using TripWMe.Models.Trips;
 
 namespace TripWMe.App.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/trips/")]
     [ApiController]
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TripsController : ControllerBase
@@ -29,7 +31,7 @@ namespace TripWMe.App.Controllers
             _linkGenerator = linkGenerator;
         }
 
-        [HttpGet(Name = "GetAllTripsWithStats")]
+        [HttpGet("GetAllTripsWithStats", Name = "GetAllTripsWithStats")]
         public async Task<ActionResult<List<TripWithStats>>> GetAllTripsWithStats()
         {
             try
@@ -44,7 +46,7 @@ namespace TripWMe.App.Controllers
             }
         }
 
-        [HttpGet(Name = "GetAllTrips")]
+        [HttpGet("GetAllTrips", Name = "GetAllTrips")]
         public async Task<ActionResult<List<TripModel>>> GetAllTrips(bool includeStops = false, bool includeUsers = false)
         {
             try
@@ -59,9 +61,8 @@ namespace TripWMe.App.Controllers
             }
         }
 
-        [HttpGet("{tripCode}")]
-        [HttpGet(Name = "GetTripByCode")]
-        public async Task<ActionResult<TripModel>> GetTripByCode(int tripCode)
+        [HttpGet("GetTrip/{tripCode}", Name = "GetTrip")]
+        public async Task<ActionResult<TripModel>> GetTrip(int tripCode)
         {
             try
             {
@@ -112,6 +113,28 @@ namespace TripWMe.App.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
+
+        [HttpPost()]
+        public async Task<IActionResult> CreateTrip([FromBody] TripForCreationModel trip)
+        {
+            if (trip == null)
+            {
+                return BadRequest();
+            }
+
+            var tripEntity = _mapper.Map<Trip>(trip);
+
+            _repository.Add(tripEntity);
+
+            if (!await _repository.SaveChangesAsync())
+            {
+                throw new Exception("Creating a trip failed on save");
+            }
+
+            var tripToReturn = _mapper.Map<TripModel>(tripEntity);
+
+            return CreatedAtRoute("GetTrip", new { id = tripToReturn.Id }, tripToReturn);
         }
 
     }

@@ -20,7 +20,7 @@ export class TripService {
     }
 
     getTrip(id: number): Observable<Trip> {
-        return this.http.get<Trip>('/api/trips/getTripByCode/' + id)
+        return this.http.get<Trip>('/api/trips/getTrip/' + id)
             .pipe(catchError(this.handleError<Trip>('getTrips')))
     }
 

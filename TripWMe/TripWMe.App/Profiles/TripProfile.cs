@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using TripWMe.Domain.Trips;
-using TripWMe.Models;
 
 namespace TripWMe.App.Profiles
 {
@@ -8,8 +6,10 @@ namespace TripWMe.App.Profiles
     {
         public TripProfile()
         {
-            CreateMap<Trip, TripModel>().ReverseMap();
-            CreateMap<Trip, TripWithStats>();
+            CreateMap<Domain.Trips.Trip, Models.Trips.TripModel>().ReverseMap();
+            CreateMap<Domain.Trips.Trip, Models.Trips.TripWithStats>();
+
+            CreateMap<Models.Trips.TripForCreationModel, Domain.Trips.Trip>();
         }   
     }
 }
