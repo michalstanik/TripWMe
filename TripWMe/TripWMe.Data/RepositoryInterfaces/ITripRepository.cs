@@ -14,5 +14,8 @@ namespace TripWMe.Data.RepositoryInterfaces
         Task<ICollection<Trip>> GetAllTripsWithStats();
         Task<ICollection<Trip>> GetTripsByUserAsync(string userName);
         Task<Trip> GetTripByCode(int tripCode);
+        bool TripExists(int tripId);
+        //Stops
+        List<Stop>GetStopsForTrip(int tripId);
     }
 }

@@ -11,6 +11,9 @@ namespace TripWMe.Domain.Trips
         public DateTime Arrival { get; set; }
         public DateTime Departure { get; set; }
 
+        public int TripId { get; set; }
+        public Trip Trip { get; set; }
+
         public Location Location { get; set; }
         public int LocationId { get; set; }
     }

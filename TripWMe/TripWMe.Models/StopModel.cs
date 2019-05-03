@@ -10,6 +10,8 @@ namespace TripWMe.Models
         public DateTime Arrival { get; set; }
         public DateTime Departure { get; set; }
 
+        public int TripId { get; set; }
+
         public string LocationName { get; set; }
         public string LocationDescription { get; set; }
         public double LocationLatitude { get; set; }

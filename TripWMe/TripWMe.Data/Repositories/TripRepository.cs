@@ -122,8 +122,8 @@ namespace TripWMe.Data.Repositories
                     .ThenInclude(l => l.Location)
                     .ThenInclude(lt => lt.LocationType)
                 .Include(c => c.UserTrips)
-                    .ThenInclude(pc => pc.TUser);
-                    //.Where(u => u.UserExist(user));
+                    .ThenInclude(e => e.TUser);
+
 
 
             return await query.ToArrayAsync();
@@ -153,6 +153,20 @@ namespace TripWMe.Data.Repositories
 
             // Only return success if at least one row was changed
             return (await _context.SaveChangesAsync()) > 0;
+        }
+
+        public bool TripExists(int tripId)
+        {
+            if(_context.Trip.Where(t => t.Id == tripId).FirstOrDefault() == null)
+            {
+                return false;
+            }
+            return true; 
+        }
+
+        public List<Stop> GetStopsForTrip(int tripId)
+        {
+            return _context.Stop.Where(t => t.TripId == tripId).ToList();
         }
     }
 }

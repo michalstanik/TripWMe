@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripWMe.Data;
 
 namespace TripWMe.Data.Migrations
 {
     [DbContext(typeof(TripWMeContext))]
-    partial class TripWMeContextModelSnapshot : ModelSnapshot
+    [Migration("20190503101314_FixForStopsEntity")]
+    partial class FixForStopsEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -263,13 +265,13 @@ namespace TripWMe.Data.Migrations
 
                     b.Property<string>("StopName");
 
-                    b.Property<int>("TripId");
+                    b.Property<int>("tripId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LocationId");
 
-                    b.HasIndex("TripId");
+                    b.HasIndex("tripId");
 
                     b.ToTable("Stop");
                 });
@@ -461,7 +463,7 @@ namespace TripWMe.Data.Migrations
 
                     b.HasOne("TripWMe.Domain.Trips.Trip", "Trip")
                         .WithMany("Stops")
-                        .HasForeignKey("TripId")
+                        .HasForeignKey("tripId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

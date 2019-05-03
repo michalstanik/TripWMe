@@ -75,7 +75,7 @@ namespace TripWMe.Data
                         },
                         new Stop()
                         {
-                            Location = location2,
+                            Location = location3,
                             Departure = DateTime.Today.AddDays(10),
                             Arrival = DateTime.Today.AddDays(5),
                             Order = 2,
@@ -97,7 +97,7 @@ namespace TripWMe.Data
                     {
                         new Stop()
                         {
-                            Location = location1,
+                            Location = location2,
                             Departure = DateTime.Today.AddDays(10),
                             Arrival = DateTime.Today.AddDays(5),
                             Order = 1,
@@ -106,7 +106,7 @@ namespace TripWMe.Data
                         },
                         new Stop()
                         {
-                            Location = location2,
+                            Location = location4,
                             Departure = DateTime.Today.AddDays(10),
                             Arrival = DateTime.Today.AddDays(5),
                             Order = 2,
