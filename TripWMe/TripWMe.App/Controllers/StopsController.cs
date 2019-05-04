@@ -82,5 +82,28 @@ namespace TripWMe.App.Controllers
                         new { tripId = tripId, id = stopToReturn.Id },
                         stopToReturn);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteStopFromTrip(int tripId, int id)
+        {
+            if(!_repository.TripExists(tripId))
+            {
+                return NotFound();
+            }
+
+            var stopForTripFromRepo = _repository.GetStopForTrip(tripId, id);
+            if(stopForTripFromRepo == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteStop(stopForTripFromRepo);
+
+            if (!await _repository.SaveChangesAsync())
+            {
+                throw new Exception($"Deleting a stop {id} for trip {tripId} failed on save");
+            }
+
+            return NoContent();
+        }
     }
 }

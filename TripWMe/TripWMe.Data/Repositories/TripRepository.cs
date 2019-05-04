@@ -130,9 +130,9 @@ namespace TripWMe.Data.Repositories
             return await query.ToArrayAsync();
         }
 
-        public async Task<Trip> GetTripByCode(int tripCode)
+        public async Task<Trip> GetTrip(int tripId)
         {
-            IQueryable<Trip> query = _context.Trip.Where(t => t.Id == tripCode);
+            IQueryable<Trip> query = _context.Trip.Where(t => t.Id == tripId);
 
             query = query
                 .Include(i => i.Stops)
@@ -179,6 +179,16 @@ namespace TripWMe.Data.Repositories
         {
             return _context.Trip.Where(a => tripIds.Contains(a.Id))
                     .ToList();
+        }
+
+        public void DeleteStop(Stop stop)
+        {
+            _context.Stop.Remove(stop);
+        }
+
+        public void DeleteTrip(Trip trip)
+        {
+            _context.Trip.Remove(trip);
         }
     }
 }

@@ -59,12 +59,12 @@ namespace TripWMe.App.Controllers
             }
         }
 
-        [HttpGet("{tripCode}", Name = "GetTrip")]
-        public async Task<ActionResult<TripModel>> GetTrip(int tripCode)
+        [HttpGet("{id}", Name = "GetTrip")]
+        public async Task<ActionResult<TripModel>> GetTrip(int id)
         {
             try
             {
-                var result = await _repository.GetTripByCode(tripCode);
+                var result = await _repository.GetTrip(id);
                 var mapped = _mapper.Map<TripModel>(result);
                 return mapped;
             }
@@ -144,6 +144,24 @@ namespace TripWMe.App.Controllers
                 return new StatusCodeResult(StatusCodes.Status409Conflict);
             }
             return NotFound();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTrip(int id)
+        {
+            var tripFromRepo = await _repository.GetTrip(id);
+            if (tripFromRepo == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteTrip(tripFromRepo);
+
+            if (!await _repository.SaveChangesAsync())
+            {
+                throw new Exception($"Deleting a trip {id} failed on save");
+            }
+
+            return NoContent();
         }
 
     }
