@@ -1,0 +1,398 @@
+{
+	"info": {
+		"_postman_id": "d1f5c7e2-ad4e-4158-a31f-b61588b4f3d5",
+		"name": "TripWMe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Stops",
+			"item": [
+				{
+					"name": "GetStopsForTrips",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:6600/api/trips/7/stops",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6600",
+							"path": [
+								"api",
+								"trips",
+								"7",
+								"stops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetStopForTrip",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:6600/api/trips/7/stops/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6600",
+							"path": [
+								"api",
+								"trips",
+								"7",
+								"stops",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreatStopForTrip",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t    \"stopName\": \"Stop 2 for Trip 7\",\n        \"stopDescription\": \"Stop Description 2\",\n        \"order\": 2,\n}"
+						},
+						"url": {
+							"raw": "http://localhost:6600/api/trips/7/stops",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6600",
+							"path": [
+								"api",
+								"trips",
+								"7",
+								"stops"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trip",
+			"item": [
+				{
+					"name": "GetAllTrips",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huLnNtaXRoQGdtYWlsLmNvbSIsImp0aSI6IjIwYjIxMzZkLWVhZmUtNDZmYi1iZDQyLTZiZmZkNjYxOGIyNCIsInVuaXF1ZV9uYW1lIjoiam9obi5zbWl0aEBnbWFpbC5jb20iLCJleHAiOjE1NTU2MDA0MzAsImlzcyI6ImxvY2FsaG9zdCIsImF1ZCI6InVzZXJzIn0.pKyGFhMWJ_XCWPcOisaY7NUZ76j-j652wZS3EiVt5To",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:6600/api/trips/GetAllTrips?includeStops=true&includeUsers=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6600",
+							"path": [
+								"api",
+								"trips",
+								"GetAllTrips"
+							],
+							"query": [
+								{
+									"key": "includeStops",
+									"value": "true"
+								},
+								{
+									"key": "includeUsers",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTripsWithStats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huLnNtaXRoQGdtYWlsLmNvbSIsImp0aSI6IjIwYjIxMzZkLWVhZmUtNDZmYi1iZDQyLTZiZmZkNjYxOGIyNCIsInVuaXF1ZV9uYW1lIjoiam9obi5zbWl0aEBnbWFpbC5jb20iLCJleHAiOjE1NTU2MDA0MzAsImlzcyI6ImxvY2FsaG9zdCIsImF1ZCI6InVzZXJzIn0.pKyGFhMWJ_XCWPcOisaY7NUZ76j-j652wZS3EiVt5To",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:6600/api/trips/GetAllTripsWithStats",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6600",
+							"path": [
+								"api",
+								"trips",
+								"GetAllTripsWithStats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTripByCode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:6600/api/trips/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6600",
+							"path": [
+								"api",
+								"trips",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateTrip",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Trip 9C\",\n    \"starRating\": 2.3\n}"
+						},
+						"url": {
+							"raw": "http://localhost:6600/api/trips",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6600",
+							"path": [
+								"api",
+								"trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateTripWithStops",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Trip 11\",\n    \"starRating\": 9,\n    \"stops\": [\n        {\n            \"stopName\": \"Stop 1\",\n            \"stopDescription\": \"Stop Description 1\",\n            \"order\": 1\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:6600/api/trips",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6600",
+							"path": [
+								"api",
+								"trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BlockTripCreation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:6600/api/trips/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6600",
+							"path": [
+								"api",
+								"trips",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TripsCollections",
+			"item": [
+				{
+					"name": "CreateTripsCollection",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n{\n    \"name\": \"Trip 13C\",\n    \"starRating\": 2.3\n},\n{\n    \"name\": \"Trip 14C\",\n    \"starRating\": 2.3\n},\n{\n    \"name\": \"Trip 15C\",\n    \"starRating\": 2.3\n}\n]"
+						},
+						"url": {
+							"raw": "http://localhost:6600/api/tripscollections",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6600",
+							"path": [
+								"api",
+								"tripscollections"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CreateNewToken",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"john.smith@gmail.com\",\n\t\"password\": \"P@ssw0rd!\"\n\n}"
+				},
+				"url": {
+					"raw": "http://localhost:6600/api/account/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6600",
+					"path": [
+						"api",
+						"account",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsersStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:6600/api/trips/GetUserStats?userName=john.smith@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6600",
+					"path": [
+						"api",
+						"trips",
+						"GetUserStats"
+					],
+					"query": [
+						{
+							"key": "userName",
+							"value": "john.smith@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

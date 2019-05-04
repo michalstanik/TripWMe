@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="PostmanRequests\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

@@ -16,8 +16,13 @@ namespace TripWMe.Data.RepositoryInterfaces
         Task<ICollection<Trip>> GetTripsByUserAsync(string userName);
         Task<Trip> GetTripByCode(int tripCode);
         bool TripExists(int tripId);
+        IEnumerable<Trip> GetTrips(IEnumerable<int> tripIds);
+        
         //Stops
         List<Stop>GetStopsForTrip(int tripId);
         Stop GetStopForTrip(int tripId, int stopId);
+
+
+
     }
 }

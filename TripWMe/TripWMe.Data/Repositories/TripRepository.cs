@@ -174,5 +174,11 @@ namespace TripWMe.Data.Repositories
         {
             return _context.Stop.Where(t => t.TripId == tripId && t.Id == stopId).FirstOrDefault();
         }
+
+        public IEnumerable<Trip> GetTrips(IEnumerable<int> tripIds)
+        {
+            return _context.Trip.Where(a => tripIds.Contains(a.Id))
+                    .ToList();
+        }
     }
 }

@@ -136,5 +136,15 @@ namespace TripWMe.App.Controllers
             return CreatedAtRoute("GetTrip", new { tripCode = tripToReturn.Id }, tripToReturn);
         }
 
+        [HttpPost("{id}")]
+        public IActionResult BlockTripCreation(int id)
+        {
+            if(_repository.TripExists(id))
+            {
+                return new StatusCodeResult(StatusCodes.Status409Conflict);
+            }
+            return NotFound();
+        }
+
     }
 }
