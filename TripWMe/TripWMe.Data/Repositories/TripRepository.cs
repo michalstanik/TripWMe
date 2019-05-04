@@ -190,5 +190,10 @@ namespace TripWMe.Data.Repositories
         {
             _context.Trip.Remove(trip);
         }
+
+        public void UpdateStopForTrip(Stop stop)
+        {
+            //Whole magic than by AutoMapper
+        }
     }
 }

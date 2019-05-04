@@ -23,6 +23,6 @@ namespace TripWMe.Data.RepositoryInterfaces
         List<Stop>GetStopsForTrip(int tripId);
         Stop GetStopForTrip(int tripId, int stopId);
         void DeleteStop(Stop stop);
-        
+        void UpdateStopForTrip(Stop stop);
     }
 }

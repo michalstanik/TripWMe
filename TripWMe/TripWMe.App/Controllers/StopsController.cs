@@ -105,5 +105,31 @@ namespace TripWMe.App.Controllers
 
             return NoContent();
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateStopForTrip(int tripId, int id, StopForUpdateModel stop)
+        {
+            if (stop == null)
+            {
+                return BadRequest();
+            }
+
+            var stopForTripFromRepo = _repository.GetStopForTrip(tripId, id);
+            if (stopForTripFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(stop, stopForTripFromRepo);
+
+            _repository.UpdateStopForTrip(stopForTripFromRepo);
+
+            if (!await _repository.SaveChangesAsync())
+            {
+                throw new Exception($"Update a stop {id} for trip {tripId} failed on save");
+            }
+
+            return Ok();
+        }
     }
 }
