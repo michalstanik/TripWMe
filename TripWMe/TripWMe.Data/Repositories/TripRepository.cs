@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TripWMe.Data.RepositoryInterfaces;
 using TripWMe.Domain;
+using TripWMe.Domain.Stops;
 using TripWMe.Domain.Trips;
 using TripWMe.Domain.User;
 
@@ -88,12 +89,12 @@ namespace TripWMe.Data.Repositories
            //  .Include(s => s.TripStats);
 
 
-            foreach (var stat in query)
-            {
-                stat.TripStats.LocationCount = stat.Stops.Distinct().Count();
-                stat.TripStats.CountryCount = stat.Stops.Select(c => c.Location).Select(c => c.CountryId).Distinct().Count();
-                stat.TripStats.UserCount = stat.UserTrips.Select(u => u.TUserId).Distinct().Count();
-            }
+            //foreach (var stat in query)
+            //{
+            //    stat.TripStats.LocationCount = stat.Stops.Distinct().Count();
+            //    stat.TripStats.CountryCount = stat.Stops.Select(c => c.Location).Select(c => c.CountryId).Distinct().Count();
+            //    stat.TripStats.UserCount = stat.UserTrips.Select(u => u.TUserId).Distinct().Count();
+            //}
 
             return await query.ToArrayAsync();
         }
@@ -167,6 +168,11 @@ namespace TripWMe.Data.Repositories
         public List<Stop> GetStopsForTrip(int tripId)
         {
             return _context.Stop.Where(t => t.TripId == tripId).ToList();
+        }
+
+        public Stop GetStopForTrip(int tripId, int stopId)
+        {
+            return _context.Stop.Where(t => t.TripId == tripId && t.Id == stopId).FirstOrDefault();
         }
     }
 }

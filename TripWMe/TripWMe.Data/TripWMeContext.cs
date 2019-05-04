@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TripWMe.Data.DataAuditFuture;
 using TripWMe.Domain.Admin;
+using TripWMe.Domain.Stops;
 using TripWMe.Domain.Trips;
 using TripWMe.Domain.User;
 

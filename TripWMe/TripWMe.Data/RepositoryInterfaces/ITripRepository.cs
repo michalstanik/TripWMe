@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TripWMe.Domain.Stops;
 using TripWMe.Domain.Trips;
 
 namespace TripWMe.Data.RepositoryInterfaces
@@ -17,5 +18,6 @@ namespace TripWMe.Data.RepositoryInterfaces
         bool TripExists(int tripId);
         //Stops
         List<Stop>GetStopsForTrip(int tripId);
+        Stop GetStopForTrip(int tripId, int stopId);
     }
 }

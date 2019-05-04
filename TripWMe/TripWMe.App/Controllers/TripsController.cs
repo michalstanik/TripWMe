@@ -133,8 +133,9 @@ namespace TripWMe.App.Controllers
             }
 
             var tripToReturn = _mapper.Map<TripModel>(tripEntity);
+            
 
-            return CreatedAtRoute("GetTrip", new { id = tripToReturn.Id }, tripToReturn);
+            return CreatedAtRoute("GetTrip", new { tripCode = tripToReturn.Id }, tripToReturn);
         }
 
     }

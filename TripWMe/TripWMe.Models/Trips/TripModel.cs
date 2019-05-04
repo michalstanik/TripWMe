@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using TripWMe.Models.Stops;
 
 namespace TripWMe.Models.Trips
 {

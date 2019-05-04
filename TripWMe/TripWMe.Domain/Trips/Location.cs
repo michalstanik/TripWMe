@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TripWMe.Domain.Stops;
 
 namespace TripWMe.Domain.Trips
 {

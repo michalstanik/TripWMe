@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace TripWMe.Models
+namespace TripWMe.Models.Stops
 {
     public class StopModel
     {
+        public int Id { get; set; }
         public string StopName { get; set; }
         public string StopDescription { get; set; }
         public int Order { get; set; }

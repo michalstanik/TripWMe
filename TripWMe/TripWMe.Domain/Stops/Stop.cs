@@ -1,6 +1,7 @@
 ﻿using System;
+using TripWMe.Domain.Trips;
 
-namespace TripWMe.Domain.Trips
+namespace TripWMe.Domain.Stops
 {
     public class Stop
     {
@@ -14,7 +15,7 @@ namespace TripWMe.Domain.Trips
         public int TripId { get; set; }
         public Trip Trip { get; set; }
 
+        public int? LocationId { get; set; }
         public Location Location { get; set; }
-        public int LocationId { get; set; }
     }
 }
