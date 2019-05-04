@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -61,7 +59,7 @@ namespace TripWMe.App.Controllers
             }
         }
 
-        [HttpGet("GetTrip/{tripCode}", Name = "GetTrip")]
+        [HttpGet("{tripCode}", Name = "GetTrip")]
         public async Task<ActionResult<TripModel>> GetTrip(int tripCode)
         {
             try
@@ -116,7 +114,7 @@ namespace TripWMe.App.Controllers
         }
 
         [HttpPost()]
-        public async Task<IActionResult> CreateTrip([FromBody] TripForCreationModel trip)
+        public async Task<IActionResult> CreateTrip(TripForCreationModel trip)
         {
             if (trip == null)
             {
