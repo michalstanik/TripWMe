@@ -117,7 +117,19 @@ namespace TripWMe.App.Controllers
             var stopForTripFromRepo = _repository.GetStopForTrip(tripId, id);
             if (stopForTripFromRepo == null)
             {
-                return NotFound();
+                var stopToAdd = _mapper.Map<Stop>(stop);
+                stopToAdd.TripId = tripId;
+                _repository.Add(stopToAdd);
+
+                if (!await _repository.SaveChangesAsync())
+                {
+                    throw new Exception($"Upserting a stop {id} for trip {tripId} failed on save");
+                }
+
+                var stopToReturn = _mapper.Map<Stop>(stopToAdd);
+
+                return CreatedAtRoute("GetStopForTrip",new {tripId = tripId, id = stopToReturn.Id },stopToReturn);
+
             }
 
             _mapper.Map(stop, stopForTripFromRepo);
