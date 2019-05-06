@@ -62,6 +62,12 @@ namespace TripWMe.App.Controllers
             {
                 return BadRequest();
             }
+
+            if (!ModelState.IsValid)
+            {
+                return new CoreHelpers.Validations.UnprocessableEntityObjectResult(ModelState);
+            }
+
             if(!_repository.TripExists(tripId))
             {
                 return NotFound();
