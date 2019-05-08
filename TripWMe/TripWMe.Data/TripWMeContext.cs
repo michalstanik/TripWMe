@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -12,6 +11,7 @@ using TripWMe.Domain.Admin;
 using TripWMe.Domain.Stops;
 using TripWMe.Domain.Trips;
 using TripWMe.Domain.User;
+using TripWMe.Domain.WorldHeritage;
 
 namespace TripWMe.Data
 {
@@ -31,6 +31,9 @@ namespace TripWMe.Data
         public DbSet<Continent> Continent { get; set; }
         public DbSet<AuditLog> AuditLog { get; set; }
         public DbSet<TripStats> TripStats { get; set; }
+
+        //WorldHeritage
+        public DbSet<WorldHeritage> WorldHeritage { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

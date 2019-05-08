@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using TripWMe.Data.SampleData;
 using TripWMe.Domain.Stops;
 using TripWMe.Domain.Trips;
 using TripWMe.Domain.User;
+using TripWMe.Domain.WorldHeritage;
 using static TripWMe.Data.SampleData.CountriesModel;
 
 namespace TripWMe.Data
@@ -33,6 +36,7 @@ namespace TripWMe.Data
             _context.Database.Migrate();
 
             SeedCountries();
+            SeedWroldHeritage();
 
             var user1 = new TUser() { FirstName = "John", LastName = "Smith", Email = "john.smith@gmail.com", UserName = "john.smith@gmail.com" };
             var user1result = await _userManager.CreateAsync(user1, "P@ssw0rd!");
@@ -163,6 +167,29 @@ namespace TripWMe.Data
 
             await _context.SaveChangesAsync();
 
+        }
+
+        private void SeedWroldHeritage()
+        {
+            XmlSerializer deserializer = new XmlSerializer(typeof(Rows));
+            TextReader textReader = new StreamReader(@"C:/Users/micha/source/Repository/TripWMe/TripWMe/TripWMe.Data/SampleData/WorldHeritage.xml");
+            Rows worldHeritage;
+
+            worldHeritage = (Rows)deserializer.Deserialize(textReader);
+
+            foreach (var item in worldHeritage.Row)
+            {
+                var newWorldHeritage = new WorldHeritage()
+                {
+                    UnescoId = item.Id_number,
+                    ImageUrl = item.Image_url,
+                    IsoCodes = item.Iso_code
+                };
+                _context.Add(newWorldHeritage);
+                _context.SaveChanges();
+            }
+
+            textReader.Close();
         }
 
         private void SeedCountries()

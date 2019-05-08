@@ -380,6 +380,23 @@ namespace TripWMe.Data.Migrations
                     b.ToTable("UserTrip");
                 });
 
+            modelBuilder.Entity("TripWMe.Domain.WorldHeritage.WorldHeritage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<string>("IsoCodes");
+
+                    b.Property<string>("UnescoId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorldHeritage");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")

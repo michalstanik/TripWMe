@@ -1,0 +1,11 @@
+﻿namespace TripWMe.Domain.WorldHeritage
+{
+    public class WorldHeritage
+    {
+        public int Id { get; set; }
+        public string UnescoId { get; set; }
+        public string ImageUrl { get; set; }
+        public string IsoCodes { get; set; }
+
+    }
+}
