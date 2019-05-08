@@ -177,17 +177,24 @@ namespace TripWMe.Data
 
             worldHeritage = (Rows)deserializer.Deserialize(textReader);
 
+            var worldHeritageList = new List<WorldHeritage>();
+
             foreach (var item in worldHeritage.Row)
             {
                 var newWorldHeritage = new WorldHeritage()
                 {
                     UnescoId = item.Id_number,
                     ImageUrl = item.Image_url,
-                    IsoCodes = item.Iso_code
+                    IsoCodes = item.Iso_code,
+                    Latitude = item.Latitude,
+                    Longitude = item.Longitude,
+                    Location = item.Location,
+                    Region = item.Region
                 };
-                _context.Add(newWorldHeritage);
-                _context.SaveChanges();
+                worldHeritageList.Add(newWorldHeritage);
             }
+            _context.AddRange(worldHeritageList);
+            _context.SaveChanges();
 
             textReader.Close();
         }

@@ -390,6 +390,14 @@ namespace TripWMe.Data.Migrations
 
                     b.Property<string>("IsoCodes");
 
+                    b.Property<string>("Latitude");
+
+                    b.Property<string>("Location");
+
+                    b.Property<string>("Longitude");
+
+                    b.Property<string>("Region");
+
                     b.Property<string>("UnescoId");
 
                     b.HasKey("Id");
