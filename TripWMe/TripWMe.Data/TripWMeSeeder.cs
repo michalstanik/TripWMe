@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using TripWMe.Data.SampleData;
+using TripWMe.Domain.GeoEntities;
 using TripWMe.Domain.Stops;
 using TripWMe.Domain.Trips;
 using TripWMe.Domain.User;

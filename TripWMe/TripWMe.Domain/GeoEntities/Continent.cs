@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TripWMe.Domain.Trips
+namespace TripWMe.Domain.GeoEntities
 {
     public class Continent
     {

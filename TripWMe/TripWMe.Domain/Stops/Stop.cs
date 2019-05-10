@@ -1,4 +1,5 @@
 ﻿using System;
+using TripWMe.Domain.GeoEntities;
 using TripWMe.Domain.Trips;
 
 namespace TripWMe.Domain.Stops

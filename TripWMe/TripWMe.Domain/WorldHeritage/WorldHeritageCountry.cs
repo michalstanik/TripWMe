@@ -1,4 +1,4 @@
-﻿using TripWMe.Domain.Trips;
+﻿using TripWMe.Domain.GeoEntities;
 
 namespace TripWMe.Domain.WorldHeritage
 {

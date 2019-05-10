@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using TripWMe.Domain.WorldHeritage;
 
-namespace TripWMe.Domain.Trips
+namespace TripWMe.Domain.GeoEntities
 {
 
     public class Country

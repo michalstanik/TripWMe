@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using TripWMe.Domain.GeoEntities;
 
-namespace TripWMe.Domain.Trips
+namespace TripWMe.Domain.GeoEntities
 {
     public class LocationType
     {
