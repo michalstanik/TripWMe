@@ -39,13 +39,14 @@ namespace TripWMe.Data
         {
             modelBuilder.Entity<UserTrip>().HasKey(s => new { s.TripId, s.TUserId });
             modelBuilder.Entity<TripStats>().HasKey(s => new { s.TripId });
+            modelBuilder.Entity<WorldHeritageCountry>().HasKey(s => new { s.WorldHeritageId, s.CountryId });
 
-            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-            {
+            //foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            //{
 
-                //modelBuilder.Entity(entityType.Name).Property<DateTime>(ShadowPropertiesHelper.Created);
-                //modelBuilder.Entity(entityType.Name).Property<DateTime>(ShadowPropertiesHelper.LastModified);
-            }
+            //    modelBuilder.Entity(entityType.Name).Property<DateTime>(ShadowPropertiesHelper.Created);
+            //    modelBuilder.Entity(entityType.Name).Property<DateTime>(ShadowPropertiesHelper.LastModified);
+            //}
             modelBuilder.Entity<Trip>().Property(p => p.TripCode).HasComputedColumnSql("'TR-' + CONVERT(varchar(10),[Id])");
             base.OnModelCreating(modelBuilder);
         }

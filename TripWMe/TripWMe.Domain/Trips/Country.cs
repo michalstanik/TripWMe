@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using TripWMe.Domain.WorldHeritage;
 
 namespace TripWMe.Domain.Trips
 {
@@ -9,6 +10,7 @@ namespace TripWMe.Domain.Trips
         public Country()
         {
             Locations = new List<Location>();
+            WoldHeritageCountries = new List<WorldHeritageCountry>();
         }
         public int Id { get;set; }
         public string Name { get; set; }
@@ -20,5 +22,7 @@ namespace TripWMe.Domain.Trips
 
         public int? RegionId { get; set; }
         public Region Region { get; set; }
+
+        public List<WorldHeritageCountry> WoldHeritageCountries { get; set; }
     }
 }

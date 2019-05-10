@@ -166,7 +166,6 @@ namespace TripWMe.Data
             }
 
             await _context.SaveChangesAsync();
-
         }
 
         private void SeedWroldHeritage()
@@ -178,9 +177,12 @@ namespace TripWMe.Data
             worldHeritage = (Rows)deserializer.Deserialize(textReader);
 
             var worldHeritageList = new List<WorldHeritage>();
+            var listOfLinkedEntities = new List<WorldHeritageCountry>();
 
             foreach (var item in worldHeritage.Row)
             {
+                var listOfCountries = item.Iso_code.ToUpper().Split(',').ToList();
+
                 var newWorldHeritage = new WorldHeritage()
                 {
                     UnescoId = item.Id_number,
@@ -191,9 +193,32 @@ namespace TripWMe.Data
                     Location = item.Location,
                     Region = item.Region
                 };
+
+                var listOfCountriesFromDb = new List<Country>();
+
+                foreach (var country in listOfCountries)
+                {
+                    var countryFromDb = _context.Country.Where(c => c.Alpha2Code == country).FirstOrDefault();
+
+                    if (countryFromDb != null)
+                    {
+                        listOfCountriesFromDb.Add(countryFromDb);
+
+                        if (listOfCountries.Count() == listOfCountriesFromDb.Count())
+                        {
+                            foreach (var countryToIclude in listOfCountriesFromDb)
+                            {
+                                listOfLinkedEntities.Add(new WorldHeritageCountry {Country = countryToIclude, WorldHeritage = newWorldHeritage });
+                            }
+                        }
+                    }
+                }
+
                 worldHeritageList.Add(newWorldHeritage);
             }
+
             _context.AddRange(worldHeritageList);
+            _context.AddRange(listOfLinkedEntities);
             _context.SaveChanges();
 
             textReader.Close();
@@ -214,7 +239,7 @@ namespace TripWMe.Data
                 foreach (var item in items)
                 {
                     var continent = new Continent();
-                    
+
                     var existingContinent = _context.Continent.Where(c => c.Name == item.region).FirstOrDefault();
 
                     if (existingContinent == null)
@@ -231,7 +256,7 @@ namespace TripWMe.Data
                     var region = new Region();
                     var existingRegion = _context.Region.Where(rg => rg.Name == item.subregion).FirstOrDefault();
 
-                    if(existingRegion == null)
+                    if (existingRegion == null)
                     {
                         region = new Region() { Name = item.subregion, Continent = continent };
                         _context.Add(region);
