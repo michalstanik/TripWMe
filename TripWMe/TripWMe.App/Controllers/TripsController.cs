@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TripWMe.CoreHelpers.Attributes;
 using TripWMe.Data.RepositoryInterfaces;
 using TripWMe.Domain.Trips;
 using TripWMe.Models;
@@ -60,20 +61,18 @@ namespace TripWMe.App.Controllers
         }
 
         [HttpGet("{id}", Name = "GetTrip")]
-        public async Task<ActionResult<TripModel>> GetTrip(int id)
+        [RequestHeaderMatchesMediaType("Accept", new[] { "application/vnd.tripwme.trip+json" })]
+        public async Task<IActionResult> GetTrip(int id)
         {
-            try
-            {
-                var result = await _repository.GetTrip(id);
-                var mapped = _mapper.Map<TripModel>(result);
-                return mapped;
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+            return await GetSpecificTrip<TripModel>(id);
         }
 
+        [HttpGet("{id}")]
+        [RequestHeaderMatchesMediaType("Accept", new[] { "application/vnd.tripwme.tripwithtripmanager+json" })]
+        public async Task<IActionResult> GetTripWithTripManager(int id)
+        {
+            return await GetSpecificTrip<TripWithTripManager>(id);
+        }
 
         [HttpGet(Name = "GetUserStats")]
         public async Task<ActionResult<UserStatsModel>> GetUserStats(string userName)
@@ -164,5 +163,16 @@ namespace TripWMe.App.Controllers
             return NoContent();
         }
 
+        private async Task<IActionResult> GetSpecificTrip<T>(int tripId) where T : class
+        {
+            var tripFromRepo = await _repository.GetTrip(tripId);
+
+            if (tripFromRepo == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(_mapper.Map<T>(tripFromRepo));
+        }
     }
 }
