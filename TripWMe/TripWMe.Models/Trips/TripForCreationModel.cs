@@ -3,13 +3,8 @@ using TripWMe.Models.Stops;
 
 namespace TripWMe.Models.Trips
 {
-    public class TripForCreationModel
+    public class TripForCreationModel : TripAbstractBase
     {
-        public string Name { get; set; }
-        public string TripCode { get; set; }
-        public double StarRating { get; set; }
-
-        public List<StopForCreationModel> Stops { get; set; }
-            = new List<StopForCreationModel>();
+        public List<StopForCreationModel> Stops { get; set; } = new List<StopForCreationModel>();
     }
 }
