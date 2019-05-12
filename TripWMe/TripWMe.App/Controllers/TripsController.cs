@@ -55,8 +55,12 @@ namespace TripWMe.App.Controllers
                             CountryCount = item.Stops.Select(c => c.Location).Select(c => c.CountryId).Distinct().Count(),
                             LocationCount = item.Stops.Distinct().Count(),
                             UserCount = item.UserTrips.Select(u => u.TUserId).Distinct().Count()
-                        }
-                    };
+                        },
+                        CountryCodes = item.Stops
+                                .Select(c => c.Location)
+                                .Select(c => c.Country)
+                                .Select(c => c.Alpha3Code).Distinct().ToList().ConvertAll(d => d.ToLower())
+                };
                     resultsToBeReturned.Add(newItem);
                 }
                 return resultsToBeReturned;

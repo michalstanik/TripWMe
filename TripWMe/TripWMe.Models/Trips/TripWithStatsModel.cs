@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using TripWMe.Models.GeoEntities;
 
 namespace TripWMe.Models.Trips
 {
@@ -9,5 +11,6 @@ namespace TripWMe.Models.Trips
         public string TripCode { get; set; }
 
         public TripStatsModel TripStats { get; set; }
+        public List<string> CountryCodes { get; set; }
     }
 }
