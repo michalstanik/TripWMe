@@ -2,10 +2,9 @@
 
 namespace TripWMe.Models.Trips
 {
-    public class TripWithStats
+    public class TripWithStatsModel
     {
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
         public string TripCode { get; set; }
 

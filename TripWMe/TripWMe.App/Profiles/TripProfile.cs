@@ -8,7 +8,7 @@ namespace TripWMe.App.Profiles
         {
             CreateMap<Domain.Trips.Trip, Models.Trips.TripModel>().ReverseMap();
             CreateMap<Domain.Trips.Trip, Models.Trips.TripWithTripManager>();
-            CreateMap<Domain.Trips.Trip, Models.Trips.TripWithStats>();
+            CreateMap<Domain.Trips.Trip, Models.Trips.TripWithStatsModel>();
 
             CreateMap<Models.Trips.TripForCreationModel, Domain.Trips.Trip>();
             CreateMap<Models.Trips.TripWithTripManagerForCreation, Domain.Trips.Trip>();

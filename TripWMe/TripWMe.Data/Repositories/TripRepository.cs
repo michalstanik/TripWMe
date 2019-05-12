@@ -72,33 +72,6 @@ namespace TripWMe.Data.Repositories
             return await query.ToArrayAsync();
         }
 
-        public async Task<ICollection<Trip>> GetAllTripsWithStats()
-        {
-            IQueryable<Trip> query = _context.Trip;
-
-            query = query
-               .Include(i => i.Stops)
-                .ThenInclude(l => l.Location)
-                .ThenInclude(c => c.Country)
-                .ThenInclude(r => r.Region)
-            .Include(c => c.Stops)
-                .ThenInclude(l => l.Location)
-                .ThenInclude(lt => lt.LocationType)
-            .Include(c => c.UserTrips)
-                .ThenInclude(pc => pc.TUser);
-           //  .Include(s => s.TripStats);
-
-
-            //foreach (var stat in query)
-            //{
-            //    stat.TripStats.LocationCount = stat.Stops.Distinct().Count();
-            //    stat.TripStats.CountryCount = stat.Stops.Select(c => c.Location).Select(c => c.CountryId).Distinct().Count();
-            //    stat.TripStats.UserCount = stat.UserTrips.Select(u => u.TUserId).Distinct().Count();
-            //}
-
-            return await query.ToArrayAsync();
-        }
-
         public async Task<ICollection<Trip>> GetTripsByUserAsync(string userName)
         {
             var user = new TUser();

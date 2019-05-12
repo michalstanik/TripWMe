@@ -32,19 +32,42 @@ namespace TripWMe.App.Controllers
         }
 
         [HttpGet("GetAllTripsWithStats", Name = "GetAllTripsWithStats")]
-        public async Task<ActionResult<List<TripWithStats>>> GetAllTripsWithStats()
+        public async Task<ActionResult<List<TripWithStatsModel>>> GetAllTripsWithStats()
         {
             try
             {
-                var results = await _repository.GetAllTripsWithStats();
-                var mapped = _mapper.Map<List<TripWithStats>>(results);
-                return mapped;
+                var includeStops = true;
+                var includeUsers = true;
+
+                var resultsFromRepo = await _repository.GetAllTripsAsync(includeStops, includeUsers);
+
+                var resultsToBeReturned = new List<TripWithStatsModel>();
+
+                foreach (var item in resultsFromRepo)
+                {
+                    var newItem = new TripWithStatsModel()
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        TripCode = item.TripCode,
+                        TripStats = new TripStatsModel()
+                        {
+                            CountryCount = item.Stops.Select(c => c.Location).Select(c => c.CountryId).Distinct().Count(),
+                            LocationCount = item.Stops.Distinct().Count(),
+                            UserCount = item.UserTrips.Select(u => u.TUserId).Distinct().Count()
+                        }
+                    };
+                    resultsToBeReturned.Add(newItem);
+                }
+                return resultsToBeReturned;
             }
             catch (Exception)
             {
+
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
 
         [HttpGet("GetAllTrips", Name = "GetAllTrips")]
         public async Task<ActionResult<List<TripModel>>> GetAllTrips(bool includeStops = false, bool includeUsers = false)
@@ -81,7 +104,7 @@ namespace TripWMe.App.Controllers
             try
             {
                 var qry = await _repository.GetTripsByUserAsync(userName);
-        
+
                 var countries = new List<CountryModel>();
                 int countryCount = 0;
                 int tripCount = 0;
@@ -94,7 +117,7 @@ namespace TripWMe.App.Controllers
                     countries.Add(mapped);
 
                     tripCount += item.TripCode.Distinct().Count();
-    
+
                 }
 
                 var result = new UserStatsModel()
@@ -102,8 +125,8 @@ namespace TripWMe.App.Controllers
                     ContryCount = countryCount,
 
                     Countries = countries
-                    
-                    
+
+
                 };
                 return result;
             }
@@ -131,7 +154,7 @@ namespace TripWMe.App.Controllers
             }
 
             var tripToReturn = _mapper.Map<TripModel>(tripEntity);
-            
+
 
             return CreatedAtRoute("GetTrip", new { tripCode = tripToReturn.Id }, tripToReturn);
         }
@@ -139,7 +162,7 @@ namespace TripWMe.App.Controllers
         [HttpPost("{id}")]
         public IActionResult BlockTripCreation(int id)
         {
-            if(_repository.TripExists(id))
+            if (_repository.TripExists(id))
             {
                 return new StatusCodeResult(StatusCodes.Status409Conflict);
             }

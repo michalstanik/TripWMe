@@ -12,7 +12,6 @@ namespace TripWMe.Data.RepositoryInterfaces
         Task<bool> SaveChangesAsync();
 
         Task<ICollection<Trip>> GetAllTripsAsync(bool includeStops = false, bool includeUsers = false);
-        Task<ICollection<Trip>> GetAllTripsWithStats();
         Task<ICollection<Trip>> GetTripsByUserAsync(string userName);
         Task<Trip> GetTrip(int tripId);
         bool TripExists(int tripId);
