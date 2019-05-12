@@ -1,3 +1,3 @@
 ﻿export * from './trip.service';
-export * from './tripWithStats.model';
+export * from './trip-with-stats.model';
 export * from './map.service';

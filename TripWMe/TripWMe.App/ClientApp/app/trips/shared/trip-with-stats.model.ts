@@ -1,4 +1,4 @@
-﻿export interface ITripWithStats {
+﻿export class TripWithStats {
     id: number;
     name: string;
     tripCode: string;
