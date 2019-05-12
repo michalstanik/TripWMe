@@ -31,7 +31,6 @@ namespace TripWMe.Data
         public DbSet<Region> Region { get; set; }
         public DbSet<Continent> Continent { get; set; }
         public DbSet<AuditLog> AuditLog { get; set; }
-        public DbSet<TripStats> TripStats { get; set; }
 
         //WorldHeritage
         public DbSet<WorldHeritage> WorldHeritage { get; set; }
@@ -39,7 +38,6 @@ namespace TripWMe.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserTrip>().HasKey(s => new { s.TripId, s.TUserId });
-            modelBuilder.Entity<TripStats>().HasKey(s => new { s.TripId });
             modelBuilder.Entity<WorldHeritageCountry>().HasKey(s => new { s.WorldHeritageId, s.CountryId });
 
             //foreach (var entityType in modelBuilder.Model.GetEntityTypes())

@@ -9,7 +9,6 @@ namespace TripWMe.Domain.Trips
         public Trip()
         {
             Stops = new List<Stop>();
-            TripStats = new TripStats();
             UserTrips = new List<UserTrip>();
         }
         public int Id { get; set; }
@@ -19,8 +18,6 @@ namespace TripWMe.Domain.Trips
 
         public List<Stop> Stops { get; set; }
         public List<UserTrip> UserTrips { get; set; }
-
-        public TripStats TripStats { get; set; }
 
         public TUser TripManager { get; set; }
 
