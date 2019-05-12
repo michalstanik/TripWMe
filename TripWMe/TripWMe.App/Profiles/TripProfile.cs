@@ -11,6 +11,7 @@ namespace TripWMe.App.Profiles
             CreateMap<Domain.Trips.Trip, Models.Trips.TripWithStats>();
 
             CreateMap<Models.Trips.TripForCreationModel, Domain.Trips.Trip>();
+            CreateMap<Models.Trips.TripWithTripManagerForCreation, Domain.Trips.Trip>();
             CreateMap<Models.Stops.StopForCreationModel, Domain.Stops.Stop>();
             CreateMap<Models.Stops.StopForUpdateModel, Domain.Stops.Stop>();
         }   

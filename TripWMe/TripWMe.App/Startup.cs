@@ -14,7 +14,6 @@ using System.Text;
 using TripWMe.Data;
 using TripWMe.Data.Repositories;
 using TripWMe.Data.RepositoryInterfaces;
-using TripWMe.Domain;
 using TripWMe.Domain.User;
 
 namespace TripWMe.App
@@ -62,6 +61,14 @@ namespace TripWMe.App
                 {
                     jsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.tripwme.trip+json");
                     jsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.tripwme.tripwithtripmanager+json");
+                }
+
+                var jsonInputFormatter = setupAction.InputFormatters.OfType<JsonInputFormatter>().FirstOrDefault();
+
+                if (jsonInputFormatter != null)
+                {
+                    jsonInputFormatter.SupportedMediaTypes.Add("application/vnd.tripwme.tripforcreation+json");
+                    jsonInputFormatter.SupportedMediaTypes.Add("application/vnd.marvin.tripwithmanagerforcreation+json");
                 }
             })
              .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
