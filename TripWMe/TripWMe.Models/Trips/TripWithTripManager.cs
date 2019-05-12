@@ -1,4 +1,6 @@
-﻿namespace TripWMe.Models.Trips
+﻿using TripWMe.Models.User;
+
+namespace TripWMe.Models.Trips
 {
     public class TripWithTripManager : TripModel 
     {

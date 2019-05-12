@@ -1,4 +1,4 @@
-﻿namespace TripWMe.Models
+﻿namespace TripWMe.Models.User
 {
     public class TUserModel
     {

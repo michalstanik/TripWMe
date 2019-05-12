@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TripWMe.Models
+namespace TripWMe.Models.User
 {
     public class LoginModel
     {

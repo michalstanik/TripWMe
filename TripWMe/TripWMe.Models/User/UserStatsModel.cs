@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using TripWMe.Models.GeoEntities;
 
-namespace TripWMe.Models
+namespace TripWMe.Models.User
 {
     public class UserStatsModel
     {

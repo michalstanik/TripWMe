@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using TripWMe.Domain.User;
-using TripWMe.Models;
+using TripWMe.Models.User;
 
 namespace TripWMe.App.Controllers
 {

@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using TripWMe.CoreHelpers.Attributes;
 using TripWMe.Data.RepositoryInterfaces;
 using TripWMe.Domain.Trips;
-using TripWMe.Models;
+using TripWMe.Models.GeoEntities;
 using TripWMe.Models.Trips;
+using TripWMe.Models.User;
 
 namespace TripWMe.App.Controllers
 {

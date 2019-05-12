@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TripWMe.Models.Stops;
+using TripWMe.Models.User;
 
 namespace TripWMe.Models.Trips
 {
