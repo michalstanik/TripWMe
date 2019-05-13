@@ -7,5 +7,7 @@
         countryCount: number;
         userCount: number;
     }
-    countryCodes: Array<string>
+    countryCodes: Array<string>;
+    startDate: Date;
+    endDate: Date;
 }

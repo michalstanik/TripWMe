@@ -1,7 +1,7 @@
 ﻿
 
-<div class="btn card card-body bg-light" (click)="navigate()">
-    <div class="card-header">
+<div class="btn card card-body bg-light trip-container" (click)="navigate()">
+    <div class="card-header trip-header">
         {{trip.tripCode}} : {{trip.name}}
     </div>
     <div class="row">
@@ -38,9 +38,7 @@
             </ul>
         </div>
     </div>
-
-
-
-
-
+    <div class="card-header trip-date">
+        {{trip.startDate | date}} - {{trip.endDate | date}}
+    </div>
 </div>

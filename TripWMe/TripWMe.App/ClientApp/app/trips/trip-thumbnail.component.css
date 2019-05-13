@@ -18,6 +18,24 @@ ul {
 }
 
 
+.trip-date{
+    font-size: 10pt;
+    font-weight:bold;
+    padding:0;
+    margin:0;
+    background-color:mistyrose;
+}
+
+.trip-container {
+    padding: 0;
+    margin: 10px;
+}
+
+.trip-header {
+    font-size: 12pt;
+    font-weight: bold;
+    background-color: mistyrose;
+}
 
 .column {
     float: left;
