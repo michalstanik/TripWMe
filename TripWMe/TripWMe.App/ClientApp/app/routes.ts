@@ -2,10 +2,12 @@
 
 import {
     TripDetailsComponent,
-    TripsListComponent
+    TripsSummaryComponent
+    
 } from './trips/index';
 
-export const appRoutes:Routes = [
+export const appRoutes: Routes = [
+    { path: '', component: TripsSummaryComponent},
     { path: 'trips/:id', component: TripDetailsComponent }
     
 

@@ -13,6 +13,7 @@ import {
     TripsListComponent,
     TripThumbnailComponent,
     TripDetailsComponent,
+    TripsSummaryComponent,
     TripService,
     MapService
 } from './trips/index';
@@ -29,7 +30,8 @@ import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-int
       TripDashboardComponent,
       TripsListComponent,
       TripThumbnailComponent,
-      TripDetailsComponent
+      TripDetailsComponent,
+      TripsSummaryComponent
   ],
     imports: [
         BrowserModule,
