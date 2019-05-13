@@ -7,7 +7,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DxVectorMapModule } from 'devextreme-angular';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModulesPro } from 'ng-uikit-pro-standard';
+import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 
 import {
     TripDashboardComponent,
@@ -45,7 +46,8 @@ import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-int
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
         DxVectorMapModule,
-        MDBBootstrapModule.forRoot()
+        MDBBootstrapModulesPro.forRoot()
+
   ],
     providers: [
         {
@@ -53,7 +55,7 @@ import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-int
             useClass: EnsureAcceptHeaderInterceptor,
             multi: true
         },
-        TripService, MapService],
+        MDBSpinningPreloader, TripService, MapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
