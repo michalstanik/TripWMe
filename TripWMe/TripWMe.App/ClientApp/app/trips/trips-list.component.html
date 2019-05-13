@@ -1,6 +1,6 @@
 ﻿
 <div>
-    <h1>List of Trips:</h1>
+    <h3>List of Trips:</h3>
     <hr />
     <div *ngFor="let trip of trips">
         <trip-thumbnail (click)="handleThumbnailClick(trip.tripCode)" [trip]="trip"></trip-thumbnail>

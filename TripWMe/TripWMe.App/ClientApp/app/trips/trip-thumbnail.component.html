@@ -1,17 +1,46 @@
 ﻿
 
 <div class="btn card card-body bg-light" (click)="navigate()">
-    <span class="">{{trip.tripCode}}</span>
-    <span class="">{{trip.name}}</span>
-    <span>{{trip.tripStats.locationCount}}</span>
-    <span>{{trip.tripStats.countryCount}}</span>
-    <span>{{trip.tripStats.userCount}}</span>
-    <ul>
-        <li *ngFor="let country of trip.countryCodes">
-            <img src="ClientApp/dist/assets/svgmaps/{{country}}.svg">
-        </li>
+    <div class="card-header">
+        {{trip.tripCode}} : {{trip.name}}
+    </div>
+    <div class="row">
+        <div class="column">
+            <ul>
+                <li>
+                    <a>Loc: </a>
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-circle-o fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x">{{trip.tripStats.locationCount}}</span>
+                    </span>
+                </li>
+                <li>
+                    <a>Users: </a>
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-circle-o fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x">{{trip.tripStats.userCount}}</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="column right">
+            <ul>
+                <li>
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-circle-o fa-stack-2x"></i>
+                        <span class="fa fa-stack-1x">{{trip.tripStats.countryCount}}</span>
+                    </span>
+                </li>
+                <li *ngFor="let country of trip.countryCodes">
+                    <img src="ClientApp/dist/assets/svgmaps/{{country}}.svg">
+                </li>
 
-    </ul>
+            </ul>
+        </div>
+    </div>
+
+
+
 
 
 </div>

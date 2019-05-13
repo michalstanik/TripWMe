@@ -6,3 +6,21 @@ img {
     width: 44px; /* you can use % */
     height: auto;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.right{
+    width:45px;
+}
+
+
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
