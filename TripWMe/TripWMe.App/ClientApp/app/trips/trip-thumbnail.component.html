@@ -6,4 +6,12 @@
     <span>{{trip.tripStats.locationCount}}</span>
     <span>{{trip.tripStats.countryCount}}</span>
     <span>{{trip.tripStats.userCount}}</span>
+    <ul>
+        <li *ngFor="let country of trip.countryCodes">
+            <img src="ClientApp/dist/assets/svgmaps/{{country}}.svg">
+        </li>
+
+    </ul>
+
+
 </div>

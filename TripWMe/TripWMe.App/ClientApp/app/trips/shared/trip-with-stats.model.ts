@@ -7,4 +7,5 @@
         countryCount: number;
         userCount: number;
     }
+    countryCodes: Array<string>
 }

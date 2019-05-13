@@ -1,3 +1,8 @@
 ﻿thumbnailHeader {
     color: aliceblue
 }
+
+img {
+    width: 44px; /* you can use % */
+    height: auto;
+}
