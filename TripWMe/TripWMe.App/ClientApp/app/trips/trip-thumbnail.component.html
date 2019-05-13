@@ -8,28 +8,17 @@
         <div class="column">
             <ul>
                 <li>
-                    <a>Loc: </a>
-                    <span class="fa-stack fa-1x">
-                        <i class="fa fa-circle-o fa-stack-2x"></i>
-                        <span class="fa fa-stack-1x">{{trip.tripStats.locationCount}}</span>
-                    </span>
+                    <a>Loc: {{trip.tripStats.locationCount}}</a>
                 </li>
                 <li>
-                    <a>Users: </a>
-                    <span class="fa-stack fa-1x">
-                        <i class="fa fa-circle-o fa-stack-2x"></i>
-                        <span class="fa fa-stack-1x">{{trip.tripStats.userCount}}</span>
-                    </span>
+                    <a>Users: {{trip.tripStats.userCount}}</a>
                 </li>
             </ul>
         </div>
         <div class="column right">
             <ul>
                 <li>
-                    <span class="fa-stack fa-1x">
-                        <i class="fa fa-circle-o fa-stack-2x"></i>
-                        <span class="fa fa-stack-1x">{{trip.tripStats.countryCount}}</span>
-                    </span>
+                    <a>{{trip.tripStats.countryCount}}</a>
                 </li>
                 <li *ngFor="let country of trip.countryCodes">
                     <img src="ClientApp/dist/assets/svgmaps/{{country}}.svg">

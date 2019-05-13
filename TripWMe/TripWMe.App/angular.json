@@ -13,7 +13,8 @@
           "skipTests": true
         },
         "@schematics/angular:component": {
-          "skipTests": true
+          "skipTests": true,
+          "styleext": "scss"
         },
         "@schematics/angular:directive": {
           "skipTests": true
@@ -35,7 +36,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "wwwroot/ClientApp/dist",
+            "outputPath": "./wwwroot/",
             "index": "ClientApp/index.html",
             "main": "ClientApp/main.ts",
             "polyfills": "ClientApp/polyfills.ts",
@@ -45,18 +46,23 @@
               "ClientApp/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              //"ClientApp/assets/jquery-jvectormap-2.0.3.css",
-              "ClientApp/styles.css",
-              "node_modules/ngx-toastr/toastr.css"
+              //"node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
+              "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
+              "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
+              "ClientApp/assets/toastr.scss",
+              "ClientApp/styles.scss"
+              //"node_modules/ngx-toastr/toastr-bs4-alert.scss"
             ],
             "scripts": [
-              //"node_modules/jquery/dist/jquery.js",
-              //"node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/devextreme/dist/js/vectormap-data/world.js"
-              //"ClientApp/assets/jquery-jvectormap-2.0.3.min.js",
-              //"ClientApp/assets/jquery-jvectormap-world-mill.js"
+              "node_modules/devextreme/dist/js/vectormap-data/world.js",
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/hammerjs/hammer.min.js"
 
             ],
             "es5BrowserSupport": true

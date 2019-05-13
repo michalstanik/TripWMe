@@ -7,6 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DxVectorMapModule } from 'devextreme-angular';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import {
     TripDashboardComponent,
@@ -43,7 +44,8 @@ import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-int
         HttpClientModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
-        DxVectorMapModule
+        DxVectorMapModule,
+        MDBBootstrapModule.forRoot()
   ],
     providers: [
         {

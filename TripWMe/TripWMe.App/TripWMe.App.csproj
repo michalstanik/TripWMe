@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="PostmanRequests\" />
     <Folder Include="wwwroot\" />
+    <Folder Include="PostmanRequests\" />
   </ItemGroup>
 
 </Project>
