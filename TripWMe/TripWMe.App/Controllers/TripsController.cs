@@ -59,8 +59,10 @@ namespace TripWMe.App.Controllers
                         CountryCodes = item.Stops
                                 .Select(c => c.Location)
                                 .Select(c => c.Country)
-                                .Select(c => c.Alpha3Code).Distinct().ToList().ConvertAll(d => d.ToLower())
-                };
+                                .Select(c => c.Alpha3Code).Distinct().ToList().ConvertAll(d => d.ToLower()),
+                        StartDate = item.Stops.Select(d => d.Arrival).Min().Date,
+                        EndDate = item.Stops.Select(d => d.Departure).Max().Date
+                    };
                     resultsToBeReturned.Add(newItem);
                 }
                 return resultsToBeReturned;
