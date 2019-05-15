@@ -3,8 +3,10 @@
 }
 
 img {
-    width: 44px; /* you can use % */
+    width: 45px;
     height: auto;
+    padding-top:1px;
+    padding-bottom:1px;
 }
 
 ul {
@@ -13,32 +15,41 @@ ul {
     padding: 0;
 }
 
-.right{
-    width:45px;
+.right {
+    float:right;
 }
 
+.left {
+    float: left;
+    text-align: left;
+    padding-left:3px;
+}
 
-.trip-date{
+.trip-date {
     font-size: 10pt;
-    font-weight:bold;
-    padding:0;
-    margin:0;
-    background-color:mistyrose;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    background-color: #00bcd4;
+    color: white;
 }
 
 .trip-container {
     padding: 0;
-    margin: 10px;
+    margin: 15px;
 }
 
 .trip-header {
+    padding:2px;
     font-size: 12pt;
     font-weight: bold;
-    background-color:deepskyblue; 
+    background-color: #00bcd4;
+    color:white;
 }
 
-.column {
-    float: left;
-    width: 50%;
-    padding: 10px;
+.trip-body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
 }
+

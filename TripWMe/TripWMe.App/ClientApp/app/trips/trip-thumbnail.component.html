@@ -1,33 +1,36 @@
 ﻿
 
-<div class="btn card card-body bg-light trip-container" (click)="navigate()">
+<div class="btn card bg-light trip-container" (click)="navigate()">
     <div class="card-header trip-header">
         {{trip.tripCode}} : {{trip.name}}
     </div>
-    <div class="row">
-        <div class="column">
-            <ul>
-                <li>
-                    <a>Loc: {{trip.tripStats.locationCount}}</a>
-                </li>
-                <li>
-                    <a>Users: {{trip.tripStats.userCount}}</a>
-                </li>
-            </ul>
-        </div>
-        <div class="column right">
-            <ul>
-                <li>
-                    <a>{{trip.tripStats.countryCount}}</a>
-                </li>
-                <li *ngFor="let country of trip.countryCodes">
-                    <img src="assets/svgmaps/{{country}}.svg">
-                </li>
+    <div class="trip-body">
 
-            </ul>
-        </div>
+            <div class="column left">
+                <ul>
+                    <li>
+                        <a class="trip-counter"><mdb-icon fas icon="map-marked-alt"></mdb-icon> Stops:  {{trip.tripStats.locationCount}}</a>
+                    </li>
+                    <li>
+                        <a class="trip-counter"><mdb-icon fas icon="search-location"></mdb-icon> Locations: {{trip.tripStats.locationCount}}</a>
+                    </li>
+                    <li>
+                        <a class="trip-counter"><mdb-icon fas icon="user-astronaut"></mdb-icon> Users: {{trip.tripStats.userCount}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="column right">
+                <ul>
+                    <li *ngFor="let country of trip.countryCodes">
+                        <img src="assets/svgmaps/{{country}}.svg">
+                    </li>
+
+                </ul>
+            </div>
+  
     </div>
     <div class="card-header trip-date">
         {{trip.startDate | date}} - {{trip.endDate | date}}
     </div>
+
 </div>

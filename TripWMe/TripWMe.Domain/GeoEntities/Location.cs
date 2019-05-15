@@ -18,7 +18,7 @@ namespace TripWMe.Domain.GeoEntities
         public double Longitude { get; set; }
 
         public Country Country { get; set; }
-        public int CountryId { get; set; }
+        public int? CountryId { get; set; }
         public List<Stop> Stops { get; set; }
 
         public int LocationTypeId { get; set; }

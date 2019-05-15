@@ -3,6 +3,7 @@
     name: string;
     tripCode: string;
     tripStats: {
+        stopCount: number;
         locationCount: number;
         countryCount: number;
         userCount: number;

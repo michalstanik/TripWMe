@@ -45,6 +45,15 @@ namespace TripWMe.App.Controllers
 
                 foreach (var item in resultsFromRepo)
                 {
+                    var minDate = new DateTime();
+                    var maxDate  = new DateTime();
+
+                    if (item.Stops.Count != 0)
+                    {
+                        minDate = item.Stops.Select(d => d.Arrival).Min().Date;
+                        maxDate = item.Stops.Select(d => d.Arrival).Max().Date;
+                    }
+
                     var newItem = new TripWithStatsModel()
                     {
                         Id = item.Id,
@@ -52,16 +61,19 @@ namespace TripWMe.App.Controllers
                         TripCode = item.TripCode,
                         TripStats = new TripStatsModel()
                         {
-                            CountryCount = item.Stops.Select(c => c.Location).Select(c => c.CountryId).Distinct().Count(),
-                            LocationCount = item.Stops.Distinct().Count(),
-                            UserCount = item.UserTrips.Select(u => u.TUserId).Distinct().Count()
+                            StopCount = item.Stops.Count,
+                            CountryCount = item.Stops.Where(s => s.Location != null).Select(c => c.Location.CountryId).Distinct().Count(),
+                            LocationCount = item.Stops.Where(s => s.Location != null).Select(c => c.Location.Id).Distinct().Count(),
+                            UserCount = item.UserTrips.Where(t => t.TUser != null).Select(u => u.TUserId).Distinct().Count()
                         },
                         CountryCodes = item.Stops
+                        .Where(s => s.Location != null)
                                 .Select(c => c.Location)
+                                .Where(v => v.CountryId != null)
                                 .Select(c => c.Country)
                                 .Select(c => c.Alpha3Code).Distinct().ToList().ConvertAll(d => d.ToLower()),
-                        StartDate = item.Stops.Select(d => d.Arrival).Min().Date,
-                        EndDate = item.Stops.Select(d => d.Departure).Max().Date
+                        StartDate = minDate,
+                        EndDate = maxDate
                     };
                     resultsToBeReturned.Add(newItem);
                 }
@@ -73,7 +85,6 @@ namespace TripWMe.App.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-
 
         [HttpGet("GetAllTrips", Name = "GetAllTrips")]
         public async Task<ActionResult<List<TripModel>>> GetAllTrips(bool includeStops = false, bool includeUsers = false)
@@ -143,6 +154,7 @@ namespace TripWMe.App.Controllers
         }
 
         [HttpPost()]
+        [RequestHeaderMatchesMediaType("Accept", new[] { "application/vnd.tripwme.tripforcreation+json" })]
         public async Task<IActionResult> CreateTrip(TripForCreationModel trip)
         {
             if (trip == null)
