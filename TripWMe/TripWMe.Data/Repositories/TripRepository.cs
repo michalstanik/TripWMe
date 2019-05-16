@@ -103,21 +103,39 @@ namespace TripWMe.Data.Repositories
             return await query.ToArrayAsync();
         }
 
-        public async Task<Trip> GetTrip(int tripId)
+        public async Task<Trip> GetTrip(int tripId, bool includeStops = false, bool includeUsers = false)
         {
             IQueryable<Trip> query = _context.Trip.Where(t => t.Id == tripId);
 
-            query = query
-                .Include(i => i.Stops)
-                    .ThenInclude(l => l.Location)
-                    .ThenInclude(c => c.Country)
-                     .ThenInclude(r => r.Region)
-                .Include(c => c.Stops)
-                    .ThenInclude(l => l.Location)
-                    .ThenInclude(lt => lt.LocationType)
-                .Include(c => c.UserTrips)
+            if (includeStops && !includeUsers)
+            {
+                query = query
+                    .Include(c => c.Stops)
+                        .ThenInclude(l => l.Location)
+                        .ThenInclude(c => c.Country)
+                        .ThenInclude(r => r.Region)
+                    .Include(c => c.Stops)
+                        .ThenInclude(l => l.Location)
+                        .ThenInclude(lt => lt.LocationType);
+            }
+            else if (!includeStops && includeUsers)
+            {
+                query = query.Include(c => c.UserTrips)
                     .ThenInclude(pc => pc.TUser);
-
+            }
+            else if (includeStops && includeUsers)
+            {
+                query = query
+                    .Include(i => i.Stops)
+                        .ThenInclude(l => l.Location)
+                        .ThenInclude(c => c.Country)
+                        .ThenInclude(r => r.Region)
+                    .Include(c => c.Stops)
+                        .ThenInclude(l => l.Location)
+                        .ThenInclude(lt => lt.LocationType)
+                    .Include(c => c.UserTrips)
+                        .ThenInclude(pc => pc.TUser);
+            }
             return await query.FirstOrDefaultAsync();
         }
 

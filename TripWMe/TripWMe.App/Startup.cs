@@ -61,6 +61,8 @@ namespace TripWMe.App
                 {
                     jsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.tripwme.trip+json");
                     jsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.tripwme.tripwithtripmanager+json");
+                    jsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.tripwme.tripwithstops+json");
+                    jsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.tripwme.tripwithstopsandusers+json");
                 }
 
                 var jsonInputFormatter = setupAction.InputFormatters.OfType<JsonInputFormatter>().FirstOrDefault();

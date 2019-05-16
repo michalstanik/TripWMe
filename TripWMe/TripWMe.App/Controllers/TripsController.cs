@@ -115,6 +115,20 @@ namespace TripWMe.App.Controllers
             return await GetSpecificTrip<TripWithTripManager>(id);
         }
 
+        [HttpGet("{id}")]
+        [RequestHeaderMatchesMediaType("Accept", new[] { "application/vnd.tripwme.tripwithstops+json" })]
+        public async Task<IActionResult> GetTripWithStops(int id)
+        {
+            return await GetSpecificTrip<TripWithStopsModel>(id, true, false);
+        }
+
+        [HttpGet("{id}")]
+        [RequestHeaderMatchesMediaType("Accept", new[] { "application/vnd.tripwme.tripwithstopsandusers+json" })]
+        public async Task<IActionResult> GetTripWithStopsAndUsers(int id)
+        {
+            return await GetSpecificTrip<TripWithStopsAndUsersModel>(id, true, true);
+        }
+
         [HttpGet(Name = "GetUserStats")]
         public async Task<ActionResult<UserStatsModel>> GetUserStats(string userName)
         {
@@ -205,9 +219,9 @@ namespace TripWMe.App.Controllers
             return NoContent();
         }
 
-        private async Task<IActionResult> GetSpecificTrip<T>(int tripId) where T : class
+        private async Task<IActionResult> GetSpecificTrip<T>(int tripId, bool includeStops = false, bool includeUsers = false) where T : class
         {
-            var tripFromRepo = await _repository.GetTrip(tripId);
+            var tripFromRepo = await _repository.GetTrip(tripId, includeStops, includeUsers);
 
             if (tripFromRepo == null)
             {
