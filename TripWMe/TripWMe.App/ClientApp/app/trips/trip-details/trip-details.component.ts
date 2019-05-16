@@ -12,7 +12,7 @@ import { Countries, MapService } from '../shared/map.service';
 })
 
 export class TripDetailsComponent {
-    trip: Trip;
+    trip: any;
     worldMap: any = mapsData.world;
     countries: Countries;
 
@@ -26,9 +26,10 @@ export class TripDetailsComponent {
  
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
-            this.tripService.getTrip(+params["id"]).subscribe((trip: Trip) => {
-                this.trip = trip;
-            })
+            this.tripService.getTripWitStopsAndUsers(+params["id"])
+                .subscribe(trip => {
+                    this.trip = trip;
+                });
         })
 
     }

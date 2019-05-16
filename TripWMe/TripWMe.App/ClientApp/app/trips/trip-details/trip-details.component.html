@@ -1,15 +1,9 @@
-﻿<script>
-    var gemoji = require('gemoji')
-    console.log(gemoji.name.cat)
-</script>
-
-
+﻿
 <div>
     <h3>Trip Details</h3>
     <h3>{{trip.name}}</h3>
     <h3>{{trip.tripCode}}</h3>
     <h3>Stars: {{trip.starRating}}</h3>
-    <h3>StopName: {{trip.stops.stopName}}</h3>
 </div>
 <div>
     <dx-vector-map id="vector-map"
@@ -25,6 +19,11 @@
         </dxi-layer>
     </dx-vector-map>
 </div>
+<app-stops *ngIf='trip && trip.stops && trip.stops.length'
+           [stops]="trip.stops">
+
+</app-stops>
+
 <div class="embed-responsive embed-responsive-16by9">
     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/4MdOxiVD4M0" allowfullscreen></iframe>
 </div>

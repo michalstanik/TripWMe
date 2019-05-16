@@ -20,6 +20,10 @@ import {
     MapService
 } from './trips/index';
 
+import {
+    StopsComponent
+}from './trips/stops/index'
+
 import { AppComponent } from './app.component';
 
 import { appRoutes } from "./routes";
@@ -29,6 +33,7 @@ import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-int
 @NgModule({
   declarations: [
       AppComponent,
+      StopsComponent,
       TripDashboardComponent,
       TripsListComponent,
       TripThumbnailComponent,

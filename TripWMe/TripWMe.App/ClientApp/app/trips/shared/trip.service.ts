@@ -7,6 +7,8 @@ import { catchError } from 'rxjs/operators';
 import { TripWithStats } from './trip-with-stats.model';
 import { Trip } from './trip.model';
 import { TripWithTripManager } from './trip-with-trip-manager.model';
+import { TripWithStops } from './trip-with-stops.model';
+import { TripWithStopsAndUsers } from './trip-with-stops-and-users.model';
 
 
 @Injectable()
@@ -17,7 +19,6 @@ export class TripService {
     getTrips(): Observable<TripWithStats[]> {
         return this.http.get<TripWithStats[]>('/api/trips/GetAllTripsWithStats')
             .pipe(catchError(this.handleError<TripWithStats[]>('getTrips',[])))
-
     }
 
     getTrip(id: number): Observable<Trip> {
@@ -32,6 +33,17 @@ export class TripService {
             .pipe(catchError(this.handleError<TripWithTripManager>('getTripsWithManagers')))
     }
 
+    getTripWitStops(id: number): Observable<TripWithStops> {
+        return this.http.get<TripWithStops>('/api/trips/' + id,
+            { headers: { 'Accept': 'application/vnd.tripwme.tripwithstops+json' } })
+            .pipe(catchError(this.handleError<TripWithStops>('getTripWithStops')))
+    }
+
+    getTripWitStopsAndUsers(id: number): Observable<TripWithStopsAndUsers> {
+        return this.http.get<TripWithStopsAndUsers>('/api/trips/' + id,
+            { headers: { 'Accept': 'application/vnd.tripwme.tripwithstops+json' } })
+            .pipe(catchError(this.handleError<TripWithStopsAndUsers>('getTripWitStopsAndUsers')))
+    }
 
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
