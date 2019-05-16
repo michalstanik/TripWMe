@@ -9,13 +9,13 @@
             <div class="column left">
                 <ul>
                     <li>
-                        <a class="trip-counter"><mdb-icon fas icon="map-marked-alt"></mdb-icon> Stops:  {{trip.tripStats.locationCount}}</a>
+                        <a class="trip-counter"><mdb-icon fas icon="map-marked-alt"></mdb-icon> Stops: </a><span class="badge badge-primary badge-pill">{{trip.tripStats.stopCount}}</span>
                     </li>
                     <li>
-                        <a class="trip-counter"><mdb-icon fas icon="search-location"></mdb-icon> Locations: {{trip.tripStats.locationCount}}</a>
+                        <a class="trip-counter"><mdb-icon fas icon="search-location"></mdb-icon> Locations: </a><span class="badge badge-primary badge-pill">{{trip.tripStats.locationCount}}</span>
                     </li>
                     <li>
-                        <a class="trip-counter"><mdb-icon fas icon="user-astronaut"></mdb-icon> Users: {{trip.tripStats.userCount}}</a>
+                        <a class="trip-counter"><mdb-icon fas icon="user-astronaut"></mdb-icon> Users: </a><span class="badge badge-primary badge-pill">{{trip.tripStats.userCount}}</span>
                     </li>
                 </ul>
             </div>
