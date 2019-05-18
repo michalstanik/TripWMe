@@ -15,8 +15,8 @@
             <tr *ngFor='let stop of stops'>
                 <td>{{stop.order}}</td>
                 <td>{{stop.stopName}}</td>
-                <td>{{stop.arrival}}</td>
-                <td>{{stop.departure}}</td>
+                <td>{{stop.arrival | date: 'short'}}</td>
+                <td>{{stop.departure | date: 'short'}}</td>
                 <td>{{stop.locationName}}</td>
             </tr>
         </tbody>

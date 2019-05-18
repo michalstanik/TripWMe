@@ -54,30 +54,38 @@ namespace TripWMe.Data
 
             var country1 = _context.Country.Where(c => c.Alpha3Code == "AZE").FirstOrDefault();
             var country2 = _context.Country.Where(c => c.Alpha3Code == "MEX").FirstOrDefault();
+            var countryThailand =_context.Country.Where(c => c.Alpha3Code == "THA").FirstOrDefault();
 
 
-            var locationType1 = new LocationType() { Name = LocationType.LocType.Drink };
-            var locationType2 = new LocationType() { Name = LocationType.LocType.WonderOfWorld };
+            var locationTypeDrink = new LocationType() { Name = LocationType.LocType.Drink };
+            var locationTypeWonderOdWorld = new LocationType() { Name = LocationType.LocType.WonderOfWorld };
 
-            var location1 = new Location() { Name = "Location 1", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 1", Country = country1, LocationType = locationType1 };
-            var location2 = new Location() { Name = "Location 2", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 2", Country = country1, LocationType = locationType2 };
-            var location3 = new Location() { Name = "Location 3", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 3", Country = country2, LocationType = locationType1 };
-            var location4 = new Location() { Name = "Location 4", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 4", Country = country2, LocationType = locationType2 };
+            var location1 = new Location() { Name = "Location 1", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 1", Country = country1, LocationType = locationTypeDrink };
+            var location2 = new Location() { Name = "Location 2", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 2", Country = country1, LocationType = locationTypeWonderOdWorld };
+            var location3 = new Location() { Name = "Location 3", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 3", Country = country2, LocationType = locationTypeWonderOdWorld };
+            var location4 = new Location() { Name = "Location 4", Latitude = 5435.4554, Longitude = 4535.6542, Description = "Description 4", Country = country2, LocationType = locationTypeDrink };
 
             _context.Trip.AddRange(
                 new Trip()
                 {
-                    Name = "Trip 1",
+                    Name = "My First Asian Trip",
                     Stops = new List<Stop>()
                     {
                         new Stop()
                         {
-                            Location = location1,
+                            Location = new Location(){
+                                Country = countryThailand,
+                                Latitude = 13.75,
+                                Longitude = 100.516667,
+                                Name = "Tai Hotel",
+                                Description = "Hotel on Bankgok superb",
+                                LocationType = locationTypeDrink
+                            },
                             Departure = DateTime.Today.AddDays(10),
                             Arrival = DateTime.Today.AddDays(5),
                             Order = 1,
-                            StopDescription = "Stop Description 1",
-                            StopName = "Stop 1"
+                            StopDescription = "Hotel on Bankgok superb",
+                            StopName = "Tai Hotel"
                         },
                         new Stop()
                         {
@@ -157,15 +165,6 @@ namespace TripWMe.Data
                     }
                 }
                 );
-            await _context.SaveChangesAsync();
-
-            var existingTrip = _context.Trip.Where(t => t.Id == 1).FirstOrDefault();
-            if (existingTrip != null)
-            {
-                existingTrip.Name = "Changed Name";
-                existingTrip.StarRating = 5.5;
-            }
-
             await _context.SaveChangesAsync();
         }
 

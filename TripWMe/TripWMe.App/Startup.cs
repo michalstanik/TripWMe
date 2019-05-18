@@ -71,6 +71,7 @@ namespace TripWMe.App
                 {
                     jsonInputFormatter.SupportedMediaTypes.Add("application/vnd.tripwme.tripforcreation+json");
                     jsonInputFormatter.SupportedMediaTypes.Add("application/vnd.marvin.tripwithmanagerforcreation+json");
+                    jsonInputFormatter.SupportedMediaTypes.Add("application/vnd.tripwme.tripwithstopsforcreation+json");
                 }
             })
              .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);

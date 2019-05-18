@@ -176,19 +176,19 @@ namespace TripWMe.App.Controllers
                 return BadRequest();
             }
 
-            var tripEntity = _mapper.Map<Trip>(trip);
+            return await AddSpecificTrip(trip);
+        }
 
-            _repository.Add(tripEntity);
-
-            if (!await _repository.SaveChangesAsync())
+        [HttpPost()]
+        [RequestHeaderMatchesMediaType("Accept", new[] { "application/vnd.tripwme.tripwithstopsforcreation+json" })]
+        public async Task<IActionResult> CreateTripWithStops(TripWithStopsForCreationModel trip)
+        {
+            if (trip == null)
             {
-                throw new Exception("Creating a trip failed on save");
+                return BadRequest();
             }
 
-            var tripToReturn = _mapper.Map<TripModel>(tripEntity);
-
-
-            return CreatedAtRoute("GetTrip", new { tripCode = tripToReturn.Id }, tripToReturn);
+            return await AddSpecificTrip(trip);
         }
 
         [HttpPost("{id}")]
@@ -229,6 +229,28 @@ namespace TripWMe.App.Controllers
             }
 
             return Ok(_mapper.Map<T>(tripFromRepo));
+        }
+
+        private async Task<IActionResult> AddSpecificTrip<T>(T trip) where T: class
+        {
+            if (trip == null)
+            {
+                return BadRequest();
+            }
+
+            var tripEntity = _mapper.Map<Trip>(trip);
+
+            _repository.Add(tripEntity);
+
+            if (!await _repository.SaveChangesAsync())
+            {
+                throw new Exception("Creating a trip failed on save");
+            }
+
+            var tripToReturn = _mapper.Map<Trip>(tripEntity);
+
+
+            return CreatedAtRoute("GetTrip", new { tripCode = tripToReturn.Id }, tripToReturn);
         }
     }
 }
