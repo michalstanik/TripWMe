@@ -18,6 +18,8 @@ namespace TripWMe.App.Profiles
 
             CreateMap<Models.Stops.StopForCreationModel, Domain.Stops.Stop>();
             CreateMap<Models.Stops.StopForUpdateModel, Domain.Stops.Stop>();
+
+            CreateMap<Models.User.TUserForCreationModel, Domain.User.TUser>();
         }   
     }
 }

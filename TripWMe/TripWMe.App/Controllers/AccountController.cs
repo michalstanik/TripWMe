@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -8,6 +9,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using TripWMe.CoreHelpers.Attributes;
+using TripWMe.CoreHelpers.ErrorHeandling;
 using TripWMe.Domain.User;
 using TripWMe.Models.User;
 
@@ -21,17 +24,20 @@ namespace TripWMe.App.Controllers
         private readonly SignInManager<TUser> _signinManager;
         private readonly ILogger<AccountController> _logger;
         private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
 
         public AccountController(UserManager<TUser> userManager, SignInManager<TUser> signinManager
-            , ILogger<AccountController> logger, IConfiguration config)
+            , ILogger<AccountController> logger, IConfiguration config, IMapper mapper)
         {
             _userManager = userManager;
             _signinManager = signinManager;
             _logger = logger;
             _config = config;
+            _mapper = mapper;
         }
 
         [HttpPost]
+        [RequestHeaderMatchesMediaType("Accept", new[] { "application/vnd.tripwme.createnewusertoken+json" })]
         public async Task<IActionResult> CreateToken([FromBody] LoginModel model)
         {
             if (ModelState.IsValid)
@@ -76,6 +82,24 @@ namespace TripWMe.App.Controllers
 
             }
             return BadRequest();
+        }
+
+        [HttpPost]
+        [RequestHeaderMatchesMediaType("Accept", new[] { "application/vnd.tripwme.createnewuser+json" })]
+        public async Task<IActionResult> Post([FromBody]TUserForCreationModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var userIdentity = _mapper.Map<TUser>(model);
+
+            var result = await _userManager.CreateAsync(userIdentity, model.Password);
+
+            if (!result.Succeeded) return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
+
+            return new OkObjectResult("Account created");
         }
     }
 }
