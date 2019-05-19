@@ -2,12 +2,13 @@
 
 import {
     TripDetailsComponent,
-    TripsSummaryComponent
+    TripsSummaryComponent,
+    TripDashboardComponent
     
 } from './trips/index';
 
 export const appRoutes: Routes = [
-    { path: '', component: TripsSummaryComponent},
+    { path: '', component: TripDashboardComponent},
     { path: 'trips/:id', component: TripDetailsComponent }
     
 

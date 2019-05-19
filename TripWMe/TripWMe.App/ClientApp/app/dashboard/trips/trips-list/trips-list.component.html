@@ -1,0 +1,17 @@
+﻿
+<div class="container">
+    <div class="trips-list-header">
+        <mdb-icon fas icon="plane-departure"></mdb-icon><a>   Your Trips:</a>
+    </div>
+    <hr />
+    <div class="scrollbar scrollbar-info">
+        <div class="force-overflow">
+            <div *ngFor="let trip of trips">
+                <trip-thumbnail (click)="handleThumbnailClick(trip.tripCode)" [trip]="trip"></trip-thumbnail>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

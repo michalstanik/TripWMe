@@ -1,0 +1,36 @@
+﻿
+
+<div class="btn card bg-light trip-container" (click)="navigate()">
+    <div class="card-header trip-header">
+        {{trip.tripCode}} : {{trip.name}}
+    </div>
+    <div class="trip-body">
+
+            <div class="column left">
+                <ul>
+                    <li>
+                        <a class="trip-counter"><mdb-icon fas icon="map-marked-alt"></mdb-icon> Stops: </a><span class="badge badge-primary badge-pill">{{trip.tripStats.stopCount}}</span>
+                    </li>
+                    <li>
+                        <a class="trip-counter"><mdb-icon fas icon="search-location"></mdb-icon> Locations: </a><span class="badge badge-primary badge-pill">{{trip.tripStats.locationCount}}</span>
+                    </li>
+                    <li>
+                        <a class="trip-counter"><mdb-icon fas icon="user-astronaut"></mdb-icon> Users: </a><span class="badge badge-primary badge-pill">{{trip.tripStats.userCount}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="column right">
+                <ul>
+                    <li *ngFor="let country of trip.countryCodes">
+                        <img src="assets/svgmaps/{{country}}.svg">
+                    </li>
+
+                </ul>
+            </div>
+  
+    </div>
+    <div class="card-header trip-date">
+        {{trip.startDate | date}} - {{trip.endDate | date}}
+    </div>
+
+</div>

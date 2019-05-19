@@ -1,0 +1,24 @@
+﻿<h3>Stops:</h3>
+
+<div class="row" style="margin: 0px;">
+    <table class='table' *ngIf='stops && stops.length'>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Arrival </th>
+                <th>Departure</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let stop of stops'>
+                <td>{{stop.order}}</td>
+                <td>{{stop.stopName}}</td>
+                <td>{{stop.arrival | date: 'short'}}</td>
+                <td>{{stop.departure | date: 'short'}}</td>
+                <td>{{stop.locationName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
