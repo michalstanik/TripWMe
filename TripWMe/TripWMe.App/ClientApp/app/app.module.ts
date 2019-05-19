@@ -28,6 +28,7 @@ import { AppComponent } from './app.component';
 
 import { appRoutes } from "./routes";
 import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-interceptor';
+import { AccountModule } from './account/account.module';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-int
       TripsSummaryComponent
   ],
     imports: [
+        AccountModule,
         BrowserModule,
         NgbModule,
         FormsModule,
@@ -51,7 +53,8 @@ import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-int
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
         DxVectorMapModule,
-        MDBBootstrapModulesPro.forRoot()
+        MDBBootstrapModulesPro.forRoot(),
+        
 
   ],
     providers: [
