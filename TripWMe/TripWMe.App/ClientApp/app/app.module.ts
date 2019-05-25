@@ -19,13 +19,16 @@ import { AccountModule } from './account/account.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { DashboardModule } from './dashboard/dasboard.module';
+import { OpenIdConnectService } from './shared/services/open-id-connect.service';
+import { SigninOidcComponent } from './account/signin-oidc/signin-oidc.component';
 
 
 @NgModule({
   declarations: [
       AppComponent,
       HeaderComponent,
-      HomeComponent
+      HomeComponent,
+      SigninOidcComponent
   ],
     imports: [
         AccountModule,
@@ -46,7 +49,8 @@ import { DashboardModule } from './dashboard/dasboard.module';
             useClass: EnsureAcceptHeaderInterceptor,
             multi: true
         },
-        MDBSpinningPreloader],
+        MDBSpinningPreloader,
+        OpenIdConnectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

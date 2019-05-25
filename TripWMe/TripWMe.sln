@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripWMe.Domain", "TripWMe.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripWMe.CoreHelpers", "TripWMe.CoreHelpers\TripWMe.CoreHelpers.csproj", "{DC50715B-A011-4A03-9236-B1F339EBE40B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWMe.Models", "TripWMe.Models\TripWMe.Models.csproj", "{4A1A5208-3D5E-4C55-A1A2-6AF14432B9DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripWMe.Models", "TripWMe.Models\TripWMe.Models.csproj", "{4A1A5208-3D5E-4C55-A1A2-6AF14432B9DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWMe.IDP", "TripWMe.IDP\TripWMe.IDP.csproj", "{B9A59A79-5887-402A-9E14-8F12552799E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4A1A5208-3D5E-4C55-A1A2-6AF14432B9DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A1A5208-3D5E-4C55-A1A2-6AF14432B9DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A1A5208-3D5E-4C55-A1A2-6AF14432B9DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9A59A79-5887-402A-9E14-8F12552799E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9A59A79-5887-402A-9E14-8F12552799E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9A59A79-5887-402A-9E14-8F12552799E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9A59A79-5887-402A-9E14-8F12552799E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
