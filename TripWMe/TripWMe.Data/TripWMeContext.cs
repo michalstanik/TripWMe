@@ -18,6 +18,10 @@ namespace TripWMe.Data
 {
     public class TripWMeContext : IdentityDbContext<TUser>
     {
+        public TripWMeContext()
+        {
+
+        }
         public TripWMeContext(DbContextOptions<TripWMeContext> options) : base(options)
         {
 

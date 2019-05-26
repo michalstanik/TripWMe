@@ -131,6 +131,7 @@ namespace TripWMe.App
             });
             services.AddTransient<TripWMeSeeder>();
             services.AddScoped<ITripRepository, TripRepository>();
+            services.AddScoped<IGeoEntitiesRepository, GeoEntitiesRepository>();
             services.AddAutoMapper();
         }
 

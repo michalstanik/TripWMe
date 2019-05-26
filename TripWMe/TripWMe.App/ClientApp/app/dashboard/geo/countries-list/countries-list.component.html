@@ -1,0 +1,26 @@
+<h3>Countries:</h3>
+
+<div class="row" style="margin: 0px;">
+    <table class='table' *ngIf='countryTrip && countryTrip.length'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Offical Name</th>
+                <th>Alpha 2</th>
+                <th>Alpha 3</th>
+                <th>Area</th>
+                <th>RegionName</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let country of countryTrip'>
+                <td>{{country.name}}</td>
+                <td>{{country.officialName}}</td>
+                <td>{{country.alpha2Code}}</td>
+                <td>{{country.alpha3Code}}</td>
+                <td>{{country.area}}</td>
+                <td>{{country.regionName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

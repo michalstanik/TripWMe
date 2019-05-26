@@ -15,4 +15,8 @@
         </dx-vector-map>
     </div>
     <h3>3. User Countries</h3>
+    <app-countries-list *ngIf='countryTrip && countryTrip.length'
+                        [countryTrip]="countryTrip">
+
+    </app-countries-list>
     <h3>4. User Friends</h3>

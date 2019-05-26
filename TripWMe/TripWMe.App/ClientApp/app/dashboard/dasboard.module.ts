@@ -11,12 +11,15 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { TripService } from './trips/shared/services/trip.service';
 import { MapService } from './trips/shared/services/map.service';
+import { GeoService } from './geo/shared/services/geo.service';
 
 import { TripsListComponent } from './trips/trips-list/trips-list.components';
 import { TripsSummaryComponent } from './trips/trips-summary/trips-summary.component';
 import { TripThumbnailComponent } from './trips/trips-list/trip-thumbnail.component';
 import { StopsComponent } from './stops/stops.component';
 import { TripDetailsComponent } from './trips/trip-details/trip-details.component';
+
+import { CountriesListComponent } from './geo/countries-list/countries-list.component';
 
 
 @NgModule({
@@ -34,10 +37,11 @@ import { TripDetailsComponent } from './trips/trip-details/trip-details.componen
         TripThumbnailComponent,
         TripsSummaryComponent,
         TripDetailsComponent,
-        StopsComponent
+        StopsComponent,
+        CountriesListComponent
     ],
     exports: [],
-    providers: [TripService,MapService]
+    providers: [TripService, MapService, GeoService]
 })
 export class DashboardModule { }
 
