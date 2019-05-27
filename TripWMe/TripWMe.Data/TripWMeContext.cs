@@ -27,21 +27,33 @@ namespace TripWMe.Data
 
         }
 
+        //Trips
         public DbSet<Trip> Trip { get; set; }
+        public DbSet<TripType> TripType { get; set; }
+
+        //Stops
         public DbSet<Stop> Stop { get; set; }
+        
+        //GeoEntites
         public DbSet<Location> Location { get; set; }
         public DbSet<LocationType> LocationType { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<Region> Region { get; set; }
         public DbSet<Continent> Continent { get; set; }
+
+        //Admin
         public DbSet<AuditLog> AuditLog { get; set; }
 
         //WorldHeritage
         public DbSet<WorldHeritage> WorldHeritage { get; set; }
 
+        //User
+        public DbSet<UserCountryAssessment> UserCountryAssessment { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserTrip>().HasKey(s => new { s.TripId, s.TUserId });
+            modelBuilder.Entity<UserCountryAssessment>().HasKey(s => new { s.CountryId, s.TUserId });
             modelBuilder.Entity<WorldHeritageCountry>().HasKey(s => new { s.WorldHeritageId, s.CountryId });
 
             //foreach (var entityType in modelBuilder.Model.GetEntityTypes())

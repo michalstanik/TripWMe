@@ -45,6 +45,7 @@ namespace TripWMe.Data
             {
                 throw new InvalidOperationException("Not enable to create user1");
             }
+
             var user2 = new TUser() { FirstName = "Mark", LastName = "Smith", Email = "mark.smith@gmail.com", UserName = "mark.smith@gmail.com" };
             var user2result = await _userManager.CreateAsync(user2, "P@ssw0rd!");
             if (user2result != IdentityResult.Success)
@@ -54,9 +55,53 @@ namespace TripWMe.Data
 
             var country1 = _context.Country.Where(c => c.Alpha3Code == "AZE").FirstOrDefault();
             var country2 = _context.Country.Where(c => c.Alpha3Code == "MEX").FirstOrDefault();
-            var countryThailand =_context.Country.Where(c => c.Alpha3Code == "THA").FirstOrDefault();
+            var countryThailand = _context.Country.Where(c => c.Alpha3Code == "THA").FirstOrDefault();
             var countryCambodia = _context.Country.Where(c => c.Alpha3Code == "KHM").FirstOrDefault();
             var countryVietnam = _context.Country.Where(c => c.Alpha3Code == "VNM").FirstOrDefault();
+
+
+            _context.TripType.AddRange(
+                        new TripType()
+                        {
+                            TripTypeName = "Real Trip"
+                        },
+                        new TripType()
+                        {
+                            TripTypeName = "Business Trip"
+                        },
+                        new TripType()
+                        {
+                            TripTypeName = "Just Visit"
+                        },
+                        new TripType()
+                        {
+                            TripTypeName = "Only Transfer"
+                        });
+
+            await _context.SaveChangesAsync();
+
+            _context.UserCountryAssessment.AddRange(
+                         new UserCountryAssessment()
+                         {
+                             TUser = user1,
+                             AreaLevelAssessment = 10,
+                             Country = countryThailand,
+                         },
+                         new UserCountryAssessment()
+                         {
+                             TUser = user1,
+                             AreaLevelAssessment = 20,
+                             Country = countryCambodia,
+                         },
+                         new UserCountryAssessment()
+                         {
+                             TUser = user1,
+                             AreaLevelAssessment = 30,
+                             Country = countryVietnam,
+                         }
+                    );
+
+            await _context.SaveChangesAsync();
 
             var locationTypeDrink = new LocationType() { Name = LocationType.LocType.Drink };
             var locationTypeWonderOdWorld = new LocationType() { Name = LocationType.LocType.WonderOfWorld };
@@ -233,7 +278,7 @@ namespace TripWMe.Data
                         {
                             foreach (var countryToIclude in listOfCountriesFromDb)
                             {
-                                listOfLinkedEntities.Add(new WorldHeritageCountry {Country = countryToIclude, WorldHeritage = newWorldHeritage });
+                                listOfLinkedEntities.Add(new WorldHeritageCountry { Country = countryToIclude, WorldHeritage = newWorldHeritage });
                             }
                         }
                     }

@@ -11,6 +11,7 @@ namespace TripWMe.Domain.User
         public string LastName { get; set; }
 
         public List<UserTrip> UserTrips { get; set; }
+        public List<UserCountryAssessment> UserCountryAssessments { get; set; }
         public List<Trip> TripsForManager { get; set; }
     }
 }

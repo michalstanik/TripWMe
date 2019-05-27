@@ -21,6 +21,8 @@ namespace TripWMe.Domain.Trips
 
         public TUser TripManager { get; set; }
 
+        public TripType TripType { get; set; }
+
         public IEnumerable<TUser> Users()
         {
             var users = new List<TUser>();

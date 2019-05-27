@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripWMe.Data;
 
 namespace TripWMe.Data.Migrations
 {
     [DbContext(typeof(TripWMeContext))]
-    partial class TripWMeContextModelSnapshot : ModelSnapshot
+    [Migration("20190527193035_UserCountryAssessment")]
+    partial class UserCountryAssessment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,28 +292,11 @@ namespace TripWMe.Data.Migrations
 
                     b.Property<string>("TripManagerId");
 
-                    b.Property<int?>("TripTypeId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TripManagerId");
 
-                    b.HasIndex("TripTypeId");
-
                     b.ToTable("Trip");
-                });
-
-            modelBuilder.Entity("TripWMe.Domain.Trips.TripType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("TripTypeName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TripType");
                 });
 
             modelBuilder.Entity("TripWMe.Domain.User.TUser", b =>
@@ -527,10 +512,6 @@ namespace TripWMe.Data.Migrations
                     b.HasOne("TripWMe.Domain.User.TUser", "TripManager")
                         .WithMany("TripsForManager")
                         .HasForeignKey("TripManagerId");
-
-                    b.HasOne("TripWMe.Domain.Trips.TripType", "TripType")
-                        .WithMany("Trips")
-                        .HasForeignKey("TripTypeId");
                 });
 
             modelBuilder.Entity("TripWMe.Domain.User.UserCountryAssessment", b =>

@@ -5,9 +5,8 @@ import { TripService } from '../shared/services/trip.service';
 import { GeoService } from '../../geo/shared/services/geo.service';
 
 import * as mapsData from 'devextreme/dist/js/vectormap-data/world.js';
-import { Countries, MapService } from '../shared/services/map.service';
-import { TripCountry } from '../../geo/shared/model/trip-country';
-import { TripCountries } from '../../geo/shared/model/trip-countries.model';
+import {  MapService } from '../shared/services/map.service';
+import { TripCountryWithAssessment } from '../../geo/shared/model/trip-country-with-assessment';
 
 
 @Component({
@@ -19,7 +18,7 @@ import { TripCountries } from '../../geo/shared/model/trip-countries.model';
 
 export class TripsSummaryComponent {
     worldMap: any = mapsData.world;
-    countries: TripCountry[];
+    countries: TripCountryWithAssessment[];
     countryTrip: any;
     entry = [];
 
@@ -29,7 +28,7 @@ export class TripsSummaryComponent {
     }
 
     ngOnInit() {
-        this.geoService.GetCountriesForAllTrips()
+        this.geoService.GetCountriesForAllTripsWithAssessment()
             .subscribe(countryTrip => {
                 this.countryTrip = countryTrip;
             });

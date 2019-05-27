@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TripCountry } from '../shared/model/trip-country';
+
+import { TripCountryWithAssessment } from '../shared/model/trip-country-with-assessment';
 
 @Component({
     selector: 'app-countries-list',
@@ -10,7 +11,7 @@ export class CountriesListComponent implements OnInit {
 
     constructor() { }
 
-    @Input() countryTrip: TripCountry[];
+    @Input() countryTrip: TripCountryWithAssessment[];
 
     ngOnInit() {
     }

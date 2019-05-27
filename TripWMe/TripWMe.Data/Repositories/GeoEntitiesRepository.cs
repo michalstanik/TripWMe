@@ -28,6 +28,19 @@ namespace TripWMe.Data.Repositories
             _userManager = userManager;
         }
 
+        public async Task<Dictionary<string, long>> GetCountireAssesmentForUser(TUser user)
+        {
+            Dictionary<string, long> countriesTobereturned = new Dictionary<string, long>();
+
+            return countriesTobereturned = await _context.UserCountryAssessment
+                .Where(a => a.TUser == user)
+                .Select(a => new
+                {
+                    a.Country.Alpha2Code, a.AreaLevelAssessment
+                })
+                .ToDictionaryAsync(p => p.Alpha2Code, p=> p.AreaLevelAssessment);
+        }
+
         public async Task<ICollection<Country>> GetCountriesForAllTrips()
         {
             var query = _context.Trip;
@@ -36,7 +49,7 @@ namespace TripWMe.Data.Repositories
 
             return results;
         }
-
+        
         public async Task<ICollection<Country>> GetCountriesForTrip(int tripId)
         {
             var query = _context.Trip.Where(t => t.Id == tripId);

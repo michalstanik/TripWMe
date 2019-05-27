@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using TripWMe.Domain.User;
 using TripWMe.Domain.WorldHeritage;
 
 namespace TripWMe.Domain.GeoEntities
@@ -11,6 +12,7 @@ namespace TripWMe.Domain.GeoEntities
         {
             Locations = new List<Location>();
             WoldHeritageCountries = new List<WorldHeritageCountry>();
+            UserCountryAssessments = new List<UserCountryAssessment>();
         }
         public int Id { get;set; }
         public string Name { get; set; }
@@ -24,5 +26,6 @@ namespace TripWMe.Domain.GeoEntities
         public Region Region { get; set; }
 
         public List<WorldHeritageCountry> WoldHeritageCountries { get; set; }
+        public List<UserCountryAssessment> UserCountryAssessments { get; set; }
     }
 }
