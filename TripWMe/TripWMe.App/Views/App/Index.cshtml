@@ -1,9 +1,9 @@
 ﻿@section Scripts{
     @*<script src="~/ClientApp/dist/runtime.js"></script>
-    <script src="~/ClientApp/dist/polyfills.js"></script>
-    <script src="~/ClientApp/dist/styles.js"></script>
-    <script src="~/ClientApp/dist/vendor.js"></script>
-    <script src="~/ClientApp/dist/main.js"></script>*@
+        <script src="~/ClientApp/dist/polyfills.js"></script>
+        <script src="~/ClientApp/dist/styles.js"></script>
+        <script src="~/ClientApp/dist/vendor.js"></script>
+        <script src="~/ClientApp/dist/main.js"></script>*@
 
     <script src="~/runtime.js"></script>
     <script src="~/polyfills.js"></script>
@@ -12,7 +12,17 @@
     <script src="~/main.js"></script>
 }
 
-
+<div class="spinning-preloader-container">
+    <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+                <div class="circle"> </div>
+            </div> <div class="gap-patch">
+                <div class="circle"> </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="cotainer">
     <app-root></app-root>
 </div>

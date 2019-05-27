@@ -1,19 +1,21 @@
-<h3>Countries:</h3>
-
 <div class="row" style="margin: 0px;">
     <table class='table' *ngIf='countryTrip && countryTrip.length'>
         <thead>
             <tr>
+                <th>#</th>
                 <th>Name</th>
                 <th>Offical Name</th>
-                <th>Alpha 2</th>
-                <th>Alpha 3</th>
+                <th>A2</th>
+                <th>A3</th>
                 <th>Area</th>
                 <th>RegionName</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor='let country of countryTrip'>
+                <td>
+                    <img src="assets/svgmaps/{{country.alpha3Code | lowercase }}.svg">
+                </td>
                 <td>{{country.name}}</td>
                 <td>{{country.officialName}}</td>
                 <td>{{country.alpha2Code}}</td>

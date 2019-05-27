@@ -19,7 +19,8 @@ import { TripThumbnailComponent } from './trips/trips-list/trip-thumbnail.compon
 import { StopsComponent } from './stops/stops.component';
 import { TripDetailsComponent } from './trips/trip-details/trip-details.component';
 
-import { CountriesListComponent } from './geo/countries-list/countries-list.component';
+import { CountriesListComponent } from './geo/countries-list/countries-list.component';;
+import { MapSummaryComponent } from './trips/trips-summary/map-summary/map-summary.component'
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { CountriesListComponent } from './geo/countries-list/countries-list.comp
         TripsSummaryComponent,
         TripDetailsComponent,
         StopsComponent,
-        CountriesListComponent
+        CountriesListComponent,        MapSummaryComponent
     ],
     exports: [],
     providers: [TripService, MapService, GeoService]

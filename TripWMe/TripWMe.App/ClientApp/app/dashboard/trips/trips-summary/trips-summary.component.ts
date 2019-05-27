@@ -6,6 +6,8 @@ import { GeoService } from '../../geo/shared/services/geo.service';
 
 import * as mapsData from 'devextreme/dist/js/vectormap-data/world.js';
 import { Countries, MapService } from '../shared/services/map.service';
+import { TripCountry } from '../../geo/shared/model/trip-country';
+import { TripCountries } from '../../geo/shared/model/trip-countries.model';
 
 
 @Component({
@@ -17,15 +19,13 @@ import { Countries, MapService } from '../shared/services/map.service';
 
 export class TripsSummaryComponent {
     worldMap: any = mapsData.world;
-    countries: Countries;
+    countries: TripCountry[];
     countryTrip: any;
+    entry = [];
 
     constructor(private tripService: TripService, private geoService: GeoService,
         private route: ActivatedRoute, private mapService: MapService) {
-        this.countries = mapService.getCountries();
-        this.customizeTooltip = this.customizeTooltip.bind(this);
-        this.customizeLayers = this.customizeLayers.bind(this);
-        this.click = this.click.bind(this);
+
     }
 
     ngOnInit() {
@@ -33,36 +33,11 @@ export class TripsSummaryComponent {
             .subscribe(countryTrip => {
                 this.countryTrip = countryTrip;
             });
+
     }
 
-    customizeTooltip(arg) {
-        let name = arg.attribute("name"),
-            country = this.countries[name];
-        if (country) {
-            return {
-                text: name + ": " + country.totalArea + "M km&#178",
-                color: country.color
-            };
-        }
-    }
-
-    customizeLayers(elements) {
-        elements.forEach((element) => {
-            let country = this.countries[element.attribute("name")];
-            if (country) {
-                element.applySettings({
-                    color: country.color,
-                    hoveredColor: "#e0e000",
-                    selectedColor: "#008f00"
-                });
-            };
-        });
-    }
-
-    click(e) {
-        let target = e.target;
-        if (target && this.countries[target.attribute("name")]) {
-            target.selected(!target.selected());
-        }
-    }
 }
+
+
+
+

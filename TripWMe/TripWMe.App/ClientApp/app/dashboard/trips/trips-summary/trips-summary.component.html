@@ -1,22 +1,29 @@
-﻿    <h3>1. User Summary</h3>
-    <h3>2. User Map</h3>
-    <div>
-        <dx-vector-map id="vector-map"
-                       [bounds]="[-180, 85, 180, -60]"
-                       (onClick)="click($event)">
-            <dxo-tooltip [enabled]="true"
-                         [customizeTooltip]="customizeTooltip">
-                <dxo-font color="#fff"></dxo-font>
-                <dxo-border [visible]="false"></dxo-border>
-            </dxo-tooltip>
-            <dxi-layer [dataSource]="worldMap"
-                       [customize]="customizeLayers">
-            </dxi-layer>
-        </dx-vector-map>
-    </div>
-    <h3>3. User Countries</h3>
-    <app-countries-list *ngIf='countryTrip && countryTrip.length'
-                        [countryTrip]="countryTrip">
+﻿<mdb-accordion>
+    <mdb-accordion-item [collapsed]="false">
+        <mdb-accordion-item-head [customClass]="'blue-text'">1. Your Summary</mdb-accordion-item-head>
+        <mdb-accordion-item-body></mdb-accordion-item-body>
+    </mdb-accordion-item>
+    
+    <mdb-accordion-item [collapsed]="false">
+        <mdb-accordion-item-head [customClass]="'blue-text'">2. Your Map</mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+            <app-map-summary>
 
-    </app-countries-list>
-    <h3>4. User Friends</h3>
+            </app-map-summary>
+        </mdb-accordion-item-body>
+    </mdb-accordion-item>
+    
+    <mdb-accordion-item>
+        <mdb-accordion-item-head [customClass]="'blue-text'">3. Your Countries</mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+            <app-countries-list *ngIf='countryTrip && countryTrip.length'
+                                [countryTrip]="countryTrip">
+            </app-countries-list>
+        </mdb-accordion-item-body>
+    </mdb-accordion-item>
+    
+    <mdb-accordion-item>
+        <mdb-accordion-item-head [customClass]="'blue-text'">4. Your Friends</mdb-accordion-item-head>
+        <mdb-accordion-item-body></mdb-accordion-item-body>
+    </mdb-accordion-item>
+</mdb-accordion>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { OpenIdConnectService } from './shared/services/open-id-connect.service';
+import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 
 @Component({
     selector: 'app-root',
@@ -9,19 +10,22 @@ import { OpenIdConnectService } from './shared/services/open-id-connect.service'
 export class AppComponent {
     title = 'Trip With Me';
 
-    constructor(private openIdConnectService: OpenIdConnectService) {
+    constructor(private openIdConnectService: OpenIdConnectService, private mdbSpinningPreloader: MDBSpinningPreloader) {
     }
 
     ngOnInit() {
-        //window.location.hash = decodeURIComponent(window.location.hash);
-        var path = window.location.pathname;
-        if (path != "/signin-oidc") {
-            if (!this.openIdConnectService.userAvailable) {
-                console.log('!!!!!!User Not avaialble');
-               this.openIdConnectService.triggerSignIn();
-            }
+        console.log('ngOnInit: app-component');
+        this.mdbSpinningPreloader.stop();
 
-        }
+        //window.location.hash = decodeURIComponent(window.location.hash);
+        //var path = window.location.pathname;
+        //if (path != "/signin-oidc") {
+        //    if (!this.openIdConnectService.userAvailable) {
+        //        console.log('!!!!!!User Not avaialble');
+        //       this.openIdConnectService.triggerSignIn();
+        //    }
+
+        //}
     }
 
 }

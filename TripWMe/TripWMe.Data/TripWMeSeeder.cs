@@ -55,7 +55,8 @@ namespace TripWMe.Data
             var country1 = _context.Country.Where(c => c.Alpha3Code == "AZE").FirstOrDefault();
             var country2 = _context.Country.Where(c => c.Alpha3Code == "MEX").FirstOrDefault();
             var countryThailand =_context.Country.Where(c => c.Alpha3Code == "THA").FirstOrDefault();
-
+            var countryCambodia = _context.Country.Where(c => c.Alpha3Code == "KHM").FirstOrDefault();
+            var countryVietnam = _context.Country.Where(c => c.Alpha3Code == "VNM").FirstOrDefault();
 
             var locationTypeDrink = new LocationType() { Name = LocationType.LocType.Drink };
             var locationTypeWonderOdWorld = new LocationType() { Name = LocationType.LocType.WonderOfWorld };
@@ -89,13 +90,37 @@ namespace TripWMe.Data
                         },
                         new Stop()
                         {
-                            Location = location3,
+                            Location = new Location(){
+                                Country = countryCambodia,
+                                Latitude = 13.75,
+                                Longitude = 100.516667,
+                                Name = "Angkor Wat",
+                                Description = "Angkor Wat",
+                                LocationType = locationTypeWonderOdWorld
+                            },
+                            Departure = DateTime.Today.AddDays(10),
+                            Arrival = DateTime.Today.AddDays(5),
+                            Order = 2,
+                            StopDescription = "Stop Description 2",
+                            StopName = "Stop 2"
+                        },
+                        new Stop()
+                        {
+                            Location = new Location(){
+                                Country = countryVietnam,
+                                Latitude = 13.75,
+                                Longitude = 100.516667,
+                                Name = "Cho Chi Min",
+                                Description = "Cho Chi Min",
+                                LocationType = locationTypeWonderOdWorld
+                            },
                             Departure = DateTime.Today.AddDays(10),
                             Arrival = DateTime.Today.AddDays(5),
                             Order = 2,
                             StopDescription = "Stop Description 2",
                             StopName = "Stop 2"
                         }
+
                     },
                     UserTrips = new List<UserTrip>()
                     {

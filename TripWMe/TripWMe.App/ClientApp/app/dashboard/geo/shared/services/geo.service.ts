@@ -5,6 +5,7 @@ import { Subject, Observable, of } from 'rxjs';
 import { TripCountry } from '../model/trip-country';
 
 import { catchError } from 'rxjs/operators';
+import { TripCountries } from '../model/trip-countries.model';
 
 
 @Injectable()
@@ -17,9 +18,9 @@ export class GeoService {
             .pipe(catchError(this.handleError<TripCountry>('getCountriesForTrip')))
     }
 
-    GetCountriesForAllTrips(): Observable<TripCountry> {
-        return this.http.get<TripCountry>('/api/geo/GetCountriesForAllTrips/')
-            .pipe(catchError(this.handleError<TripCountry>('GetCountriesForAllTrips')))
+    GetCountriesForAllTrips(): Observable<TripCountry[]> {
+        return this.http.get<TripCountry[]>('/api/geo/GetCountriesForAllTrips/')
+            .pipe(catchError(this.handleError<TripCountry[]>('GetCountriesForAllTrips')))
     }
 
     private handleError<T>(operation = 'operation', result?: T) {
