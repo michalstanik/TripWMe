@@ -58,7 +58,7 @@ namespace TripWMe.Data
             var countryThailand = _context.Country.Where(c => c.Alpha3Code == "THA").FirstOrDefault();
             var countryCambodia = _context.Country.Where(c => c.Alpha3Code == "KHM").FirstOrDefault();
             var countryVietnam = _context.Country.Where(c => c.Alpha3Code == "VNM").FirstOrDefault();
-
+            var countryUK = _context.Country.Where(c => c.Alpha3Code == "GBR").FirstOrDefault();
 
             _context.TripType.AddRange(
                         new TripType()
@@ -84,20 +84,44 @@ namespace TripWMe.Data
                          new UserCountryAssessment()
                          {
                              TUser = user1,
-                             AreaLevelAssessment = 10,
-                             Country = countryThailand,
-                         },
-                         new UserCountryAssessment()
-                         {
-                             TUser = user1,
-                             AreaLevelAssessment = 20,
-                             Country = countryCambodia,
-                         },
-                         new UserCountryAssessment()
-                         {
-                             TUser = user1,
                              AreaLevelAssessment = 30,
+                             Country = countryThailand,
+                             CountryKnowledgeType = UserCountryAssessment.CountryVisitType.RealTrip
+                         },
+                         new UserCountryAssessment()
+                         {
+                             TUser = user1,
+                             AreaLevelAssessment = 70,
+                             Country = countryCambodia,
+                             CountryKnowledgeType = UserCountryAssessment.CountryVisitType.RealTrip
+                         },
+                         new UserCountryAssessment()
+                         {
+                             TUser = user1,
+                             AreaLevelAssessment = 40,
                              Country = countryVietnam,
+                             CountryKnowledgeType = UserCountryAssessment.CountryVisitType.RealTrip
+                         },
+                         new UserCountryAssessment()
+                         {
+                             TUser = user1,
+                             AreaLevelAssessment = 90,
+                             Country = country1,
+                             CountryKnowledgeType = UserCountryAssessment.CountryVisitType.RealTrip
+                         },
+                         new UserCountryAssessment()
+                         {
+                             TUser = user1,
+                             AreaLevelAssessment = 60,
+                             Country = country2,
+                             CountryKnowledgeType = UserCountryAssessment.CountryVisitType.RealTrip
+                         },
+                         new UserCountryAssessment()
+                         {
+                             TUser = user1,
+                             AreaLevelAssessment = 60,
+                             Country = countryUK,
+                             CountryKnowledgeType = UserCountryAssessment.CountryVisitType.BussinessTrip
                          }
                     );
 
