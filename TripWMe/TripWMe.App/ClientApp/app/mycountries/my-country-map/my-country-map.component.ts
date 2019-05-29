@@ -1,26 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { TripCountryWithAssessment } from 'ClientApp/app/shared/models/country/trip-country-with-assessment';
 import { ActivatedRoute } from '@angular/router';
 
 import * as mapsData from 'devextreme/dist/js/vectormap-data/world.js';
-
-import { GeoService } from 'ClientApp/app/dashboard/geo/shared/services/geo.service';
-import { TripCountryWithAssessment } from 'ClientApp/app/shared/models/country/trip-country-with-assessment';
-
-
+import { MyCountryService } from '../shared/services/mycountry.service';
 
 @Component({
-  selector: 'app-map-summary',
-  templateUrl: './map-summary.component.html',
-  styleUrls: ['./map-summary.component.scss']
+  selector: 'app-my-country-map',
+  templateUrl: './my-country-map.component.html',
+  styleUrls: ['./my-country-map.component.scss']
 })
-export class MapSummaryComponent implements OnInit {
+export class MyCountryMapComponent implements OnInit {
+
     worldMap: any = mapsData.world;
     countries: TripCountryWithAssessment[];
 
-    constructor(private geoService: GeoService, private route: ActivatedRoute) { }
+    constructor(private myCountryService: MyCountryService, private route: ActivatedRoute) { }
 
     ngOnInit() {
-        this.geoService.GetCountriesForAllTripsWithAssessment()
+        this.myCountryService.GetCountriesForAllTripsWithAssessment()
             .subscribe(countryTrips => {
                 this.countries = countryTrips as TripCountryWithAssessment[];
             });
@@ -32,7 +30,6 @@ export class MapSummaryComponent implements OnInit {
         elements.forEach((element) => {
 
             for (let entry of this.countries) {
-                //console.log('Name: ', entry.name);
                 if (entry.name === element.attribute("name")) {
                     console.log('Map element ', element.attribute("name"));
 

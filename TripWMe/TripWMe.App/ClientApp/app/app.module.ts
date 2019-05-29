@@ -15,12 +15,16 @@ import { AppComponent } from './app.component';
 import { routing } from "./app-routing";
 import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-interceptor';
 
-import { AccountModule } from './account/account.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
+
+import { AccountModule } from './account/account.module';
 import { DashboardModule } from './dashboard/dasboard.module';
+import { MyCountriesModule } from './mycountries/mycountries.module';
+
 import { OpenIdConnectService } from './shared/services/open-id-connect.service';
 import { SigninOidcComponent } from './account/signin-oidc/signin-oidc.component';
+
 
 
 @NgModule({
@@ -33,6 +37,7 @@ import { SigninOidcComponent } from './account/signin-oidc/signin-oidc.component
     imports: [
         AccountModule,
         DashboardModule,
+        MyCountriesModule,
         BrowserModule,
         NgbModule,
         FormsModule,       

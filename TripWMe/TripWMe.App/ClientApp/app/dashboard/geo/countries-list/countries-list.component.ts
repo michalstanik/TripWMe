@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { TripCountryWithAssessment } from 'ClientApp/app/shared/models/country/trip-country-with-assessment';
 
-import { TripCountryWithAssessment } from '../shared/model/trip-country-with-assessment';
 
 @Component({
     selector: 'app-countries-list',

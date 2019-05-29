@@ -4,12 +4,11 @@ import { Injectable } from "@angular/core";
 import { Subject, Observable, of } from 'rxjs';
 
 import { catchError } from 'rxjs/operators';
-
 import { TripCountry } from 'ClientApp/app/shared/models/country/trip-country';
 import { TripCountryWithAssessment } from 'ClientApp/app/shared/models/country/trip-country-with-assessment';
 
 @Injectable()
-export class GeoService {
+export class MyCountryService {
 
     constructor(private http: HttpClient) { }
 

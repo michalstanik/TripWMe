@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\app\dashboard\stops\shared\" />
+    <Folder Include="ClientApp\app\mycountries\shared\models\" />
     <Folder Include="wwwroot\" />
     <Folder Include="PostmanRequests\" />
   </ItemGroup>

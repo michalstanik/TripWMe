@@ -6,7 +6,8 @@ import { GeoService } from '../../geo/shared/services/geo.service';
 
 import * as mapsData from 'devextreme/dist/js/vectormap-data/world.js';
 import {  MapService } from '../shared/services/map.service';
-import { TripCountryWithAssessment } from '../../geo/shared/model/trip-country-with-assessment';
+import { TripCountryWithAssessment } from 'ClientApp/app/shared/models/country/trip-country-with-assessment';
+
 
 
 @Component({

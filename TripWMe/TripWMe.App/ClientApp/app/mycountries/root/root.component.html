@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <app-my-country-list></app-my-country-list>
+        </div>
+        <div class="col-10">
+            <mdb-accordion>
+                <mdb-accordion-item [collapsed]="false">
+                    <mdb-accordion-item-head [customClass]="'blue-text'">Your Personal Map:</mdb-accordion-item-head>
+                    <mdb-accordion-item-body>
+                        <app-my-country-map>
+
+                        </app-my-country-map>
+                    </mdb-accordion-item-body>
+                </mdb-accordion-item>
+            </mdb-accordion>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

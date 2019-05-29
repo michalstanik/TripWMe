@@ -1,0 +1,14 @@
+<div *ngIf="countries && countries.length">
+    <dx-vector-map id="vector-map"
+                   [bounds]="[-180, 85, 180, -75]"
+                   (onClick)="click($event)">
+        <dxo-tooltip [enabled]="true"
+                     [customizeTooltip]="customizeTooltip">
+            <dxo-font color="#fff"></dxo-font>
+            <dxo-border [visible]="false"></dxo-border>
+        </dxo-tooltip>
+        <dxi-layer [dataSource]="worldMap"
+                   [customize]="customizeLayers">
+        </dxi-layer>
+    </dx-vector-map>
+</div>
