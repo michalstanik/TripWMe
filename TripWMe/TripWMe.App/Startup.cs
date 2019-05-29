@@ -132,7 +132,22 @@ namespace TripWMe.App
             services.AddTransient<TripWMeSeeder>();
             services.AddScoped<ITripRepository, TripRepository>();
             services.AddScoped<IGeoEntitiesRepository, GeoEntitiesRepository>();
+
             services.AddAutoMapper();
+
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("TripWMeOpenAPISpecification", new Microsoft.OpenApi.Models.OpenApiInfo()
+                {
+                    Title = "TripWme API",
+                    Version = "1.0"
+                });
+
+                setupAction.ResolveConflictingActions(apiDesscriptions =>
+                {
+                    return apiDesscriptions.First();
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -150,6 +165,13 @@ namespace TripWMe.App
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(setupAction => 
+            {
+                setupAction.SwaggerEndpoint("/swagger/TripWMeOpenAPISpecification/swagger.json", "TripWMe API");
+                setupAction.RoutePrefix = "api";
+            });
 
             app.UseStaticFiles();
 
