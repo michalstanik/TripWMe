@@ -14,18 +14,21 @@ export class SigninOidcComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
-        this.openIdConnectService.userLoaded$.subscribe((userLoaded) => {
-            if (userLoaded) {
-                this.router.navigate(['./dashboard']);
-            }
-            else {
-                if (!environment.production) {
-                    console.log("An error happened: user wasn't loaded.");
-                }
-            }
-        });
+        console.log("SigninOidcComponent OnInit");
+        //this.openIdConnectService.userLoaded$.subscribe((userLoaded) => {
+        //    if (userLoaded) {
+        //        console.log("use loaded:", userLoaded);
+        //        this.router.navigate(['./']);
+        //    }
+        //    else {
+        //        if (!environment.production) {
+        //            console.log("An error happened: user wasn't loaded.");
+        //        }
+        //    }
+        //});
 
         this.openIdConnectService.handleCallback();
+        this.router.navigate(['./']);
     }
 
 

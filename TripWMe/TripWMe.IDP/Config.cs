@@ -20,8 +20,8 @@ namespace TripWMe.IDP
                     Claims = new List<Claim>
                     {
                         new Claim("given_name", "John"),
-                        new Claim("family_name", "Smith"),
-                        new Claim("role", "Administrator"),
+                        new Claim("family_name", "Smith")
+                        //new Claim("role", "Administrator"),
                     }
                 },
                 new TestUser
@@ -32,8 +32,8 @@ namespace TripWMe.IDP
                     Claims = new List<Claim>
                     {
                         new Claim("given_name", "Mark"),
-                        new Claim("family_name", "Smith"),
-                        new Claim("role", "User"),
+                        new Claim("family_name", "Smith")
+                        //new Claim("role", "User"),
                     }
                 }
             };
@@ -44,8 +44,8 @@ namespace TripWMe.IDP
             return new List<IdentityResource>
             {
                new IdentityResources.OpenId(),
-               new IdentityResources.Profile(),
-               new IdentityResource("roles", "Your role(s)", new []{"role"}),
+               new IdentityResources.Profile()
+               //new IdentityResource("roles", "Your role(s)", new []{"role"}),
             };
         }
 
@@ -77,9 +77,32 @@ namespace TripWMe.IDP
                     AllowedScopes = new []
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
-                        "roles",
-                        "tripwithmeapi",
+                        IdentityServerConstants.StandardScopes.Profile
+                        //"roles",
+                        //"tripwithmeapi",
+                    }
+                },
+                new Client
+                {
+                    ClientName = "Trip With Me Server",
+                    ClientId="tripwithmeserver",
+                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    RedirectUris =new List<string>
+                    {
+                        "https://localhost:44339/signin-oidc"
+                    },
+                    PostLogoutRedirectUris = new List<string>()
+                    {
+                        "https://localhost:44339/signout-callback-oidc"
+                    },
+                    AllowedScopes = new []
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    },
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
                     }
                 }
             };

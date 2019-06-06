@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using TripWMe.App.Auth;
@@ -28,6 +33,7 @@ namespace TripWMe.App
         {
             Configuration = configuration;
             Environment = environment;
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
         }
 
         public IConfiguration Configuration { get; }
@@ -41,57 +47,44 @@ namespace TripWMe.App
             })
             .AddEntityFrameworkStores<TripWMeContext>();
 
+            // register an IHttpContextAccessor so we can access the current
+            // HttpContext in services by injecting it
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddSingleton<IJwtFactory, JwtFactory>();
 
-            // jwt wire up
-            // Get options from app settings
-            var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
-            var _signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]));
-            
+            //jwt wire up
+            //Get options from app settings
+            //var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
+            //var _signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]));
+
             // Configure JwtIssuerOptions
-            services.Configure<JwtIssuerOptions>(options =>
+            //services.Configure<JwtIssuerOptions>(options =>
+            //{
+            //    options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
+            //    options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
+            //    options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+            //});
+
+            //var tokenValidationParameters = new TokenValidationParameters
+            //{
+            //    ValidateIssuer = true,
+            //    ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
+
+            //    ValidateAudience = true,
+            //    ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
+
+            //    ValidateIssuerSigningKey = true,
+            //    IssuerSigningKey = _signingKey,
+
+            //    RequireExpirationTime = false,
+            //    ValidateLifetime = true,
+            //    ClockSkew = TimeSpan.Zero
+            //};
+
+            services.AddMvc(setupAction =>
             {
-                options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
-                options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
-                options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
-            });
-
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
-
-                ValidateAudience = true,
-                ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
-
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = _signingKey,
-
-                RequireExpirationTime = false,
-                ValidateLifetime = true,
-                ClockSkew = TimeSpan.Zero
-            };
-
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-            }).AddJwtBearer(configureOptions =>
-            {
-                configureOptions.ClaimsIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
-                configureOptions.TokenValidationParameters = tokenValidationParameters;
-                configureOptions.SaveToken = true;
-            });
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
-            });
-
-
-            services.AddMvc(setupAction => 
-            {
+                //setupAction.Filters.Add(new RequireHttpsAttribute());
                 setupAction.ReturnHttpNotAcceptable = true;
                 setupAction.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
 
@@ -116,7 +109,61 @@ namespace TripWMe.App
                     jsonInputFormatter.SupportedMediaTypes.Add("application/vnd.tripwme.createnewuser+json");
                 }
             })
-             .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    //options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+            //    //options.DefaultScheme = "Cookies";
+            //    //options.DefaultChallengeScheme = "oidc";
+
+            //    //options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    //options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            //})
+            //.AddFacebook(options => {
+            //    options.AppId = Configuration["FacebookLogin:AppId"];
+            //    options.AppSecret = Configuration["FacebookLogin:AppSecret"];
+            //})
+            //.AddCookie(options =>
+            //{
+            //    options.Cookie.Name = "Cookies";
+            //    //options.LoginPath = "/auth/signin";
+            //})
+            //.AddCookie("Cookies")
+            //.AddOpenIdConnect("oidc", options =>
+            //{
+            //    options.SignInScheme = "Cookies";
+            //    options.Authority = "https://localhost:44313";
+            //    options.ClientId = "tripwithmeserver";
+            //    options.ResponseType = "code id_token";
+            //    options.Scope.Add("openid");
+            //    options.Scope.Add("profile");
+            //    options.SaveTokens = true;
+            //    options.ClientSecret = "secret";
+            //    options.GetClaimsFromUserInfoEndpoint = true;
+            //    options.ClaimActions.Remove("amr");
+            //    options.ClaimActions.DeleteClaims("sid");
+            //    options.ClaimActions.DeleteClaims("idp");
+            //})
+
+            //.AddJwtBearer(configureOptions =>
+            //{
+            //    configureOptions.ClaimsIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
+            //    configureOptions.TokenValidationParameters = tokenValidationParameters;
+            //    configureOptions.SaveToken = true;
+            //});
+
+
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
+            //});
+
+
 
             services.AddDbContext<TripWMeContext>(cfg =>
             {
@@ -167,7 +214,7 @@ namespace TripWMe.App
             app.UseAuthentication();
 
             app.UseSwagger();
-            app.UseSwaggerUI(setupAction => 
+            app.UseSwaggerUI(setupAction =>
             {
                 setupAction.SwaggerEndpoint("/swagger/TripWMeOpenAPISpecification/swagger.json", "TripWMe API");
                 setupAction.RoutePrefix = "api";

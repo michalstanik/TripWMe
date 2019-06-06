@@ -17,15 +17,19 @@ export class AppComponent {
         console.log('ngOnInit: app-component');
         this.mdbSpinningPreloader.stop();
 
-        //window.location.hash = decodeURIComponent(window.location.hash);
-        //var path = window.location.pathname;
-        //if (path != "/signin-oidc") {
-        //    if (!this.openIdConnectService.userAvailable) {
-        //        console.log('!!!!!!User Not avaialble');
-        //       this.openIdConnectService.triggerSignIn();
-        //    }
+        this.openIdConnectService.getUser();
+        console.log("Path 1", window.location.pathname);
+        window.location.hash = decodeURIComponent(window.location.hash);
 
-        //}
+        console.log("Path 2", window.location.pathname);
+        var path = window.location.pathname;
+        if (path != "/signin-oidc") {
+            if (!this.openIdConnectService.userAvailable) {
+                console.log('!!!!!!User Not avaialble');
+               this.openIdConnectService.triggerSignIn();
+            }
+
+        }
     }
 
 }

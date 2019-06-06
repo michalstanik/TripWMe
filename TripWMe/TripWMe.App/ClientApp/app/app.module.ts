@@ -23,16 +23,17 @@ import { DashboardModule } from './dashboard/dasboard.module';
 import { MyCountriesModule } from './mycountries/mycountries.module';
 
 import { OpenIdConnectService } from './shared/services/open-id-connect.service';
-import { SigninOidcComponent } from './account/signin-oidc/signin-oidc.component';
+import { SigninOidcComponent } from './signin-oidc/signin-oidc.component';
 
 
 
 @NgModule({
-  declarations: [
+    declarations: [
+      SigninOidcComponent,
       AppComponent,
       HeaderComponent,
-      HomeComponent,
-      SigninOidcComponent
+      HomeComponent
+
   ],
     imports: [
         AccountModule,

@@ -8,7 +8,7 @@ export const environment = {
           authority: 'https://localhost:44313/',
           client_id: 'tripwithmeclient',
           redirect_uri: 'https://localhost:44339/#/signin-oidc#',
-          scope: 'openid profile roles',
+          scope: 'openid profile',
           response_type: 'id_token'
     }
 };
